@@ -1,0 +1,18 @@
+[
+  {
+    "path": "posts/2020-10-01-concatenando-dataframes/",
+    "title": "Concatenando data.frames",
+    "description": "Como juntar os diversos arquivos .dbc do DATASUS em um data.frame.",
+    "author": [
+      {
+        "name": "Mario M.",
+        "url": "https://momenezes.github.io/tutorials"
+      }
+    ],
+    "date": "2020-10-01",
+    "categories": [],
+    "preview": {},
+    "last_modified": "2020-10-01T16:39:51-03:00",
+    "input_file": {}
+  }
+]
