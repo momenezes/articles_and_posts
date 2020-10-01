@@ -1,5 +1,5 @@
 ---
-title: "Mario M."
+title: "Tutoriais, estudos e pingos sobre R e outras ferramentas"
 site: distill::distill_website
 listing: posts
 ---

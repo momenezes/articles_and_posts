@@ -5,14 +5,14 @@
     "description": "Como juntar os diversos arquivos .dbc do DATASUS em um data.frame.",
     "author": [
       {
-        "name": "Mario M.",
+        "name": "Mario O. de Menezes",
         "url": "https://momenezes.github.io/tutorials"
       }
     ],
     "date": "2020-10-01",
     "categories": [],
     "preview": {},
-    "last_modified": "2020-10-01T16:39:51-03:00",
+    "last_modified": "2020-10-01T18:17:54-03:00",
     "input_file": {}
   }
 ]

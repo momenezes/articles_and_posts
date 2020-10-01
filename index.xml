@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Alguns Tutoriais</title>
+    <link>https://momenezes.github.io/tutorials/</link>
+    <atom:link href="https://momenezes.github.io/tutorials/index.xml" rel="self" type="application/rss+xml"/>
+    <description>Pequenos estudos e experimentos de códigos em R.
+Outras tecnologias, ferramentas e linguagens também.
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Thu, 01 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Concatenando data.frames</title>
+      <dc:creator>Mario O. de Menezes</dc:creator>
+      <link>https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes</link>
+      <description>Como juntar os diversos arquivos .dbc do DATASUS em um data.frame.</description>
+      <guid>https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes</guid>
+      <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>

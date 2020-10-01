@@ -1,8 +1,14 @@
-name: "Some Code Wanderings"
-title: "Mario M."
+name: "tutorials-r-and-other-tools"
+title: "Alguns Tutoriais"
 description: |
-  Mario M.
+  Pequenos estudos e experimentos de códigos em R.
+  Outras tecnologias, ferramentas e linguagens também.
 output_dir: "."
+base_url: https://momenezes.github.io/tutorials/
+collections:
+  posts:
+    disqus: tutorials-r-and-other-tools
+    share: [twitter, linkedin]
 navbar:
   left:
     - text: "Home"

@@ -1,7 +1,7 @@
 ---
 title: "About this blog"
 description: |
-  Some additional details about the blog
+  Estou reunindo aqui trechos de códigos, normalmente resultado de algum estudo para atender a uma necessidade específica minha ou de alguém que pediu ajuda.
 ---
 
 ```{r setup, include=FALSE}
