@@ -5,3 +5,4 @@
 public
 _posts/**/*_cache/**
 _posts/**/*_files/**
+posts/**/*_files/**
