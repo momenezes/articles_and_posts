@@ -1,0 +1,247 @@
+---
+title: "Paralelizando a leitura de muitos arquivos no R"
+description: |
+  Acelerando a leitura de muitos de arquivos no R para posterior processamento.
+author:
+  - name: Mario O. de Menezes
+    url: https://momenezes.github.io/tutorials
+date: 10-02-2020
+output:
+  distill::distill_article:
+    self_contained: false
+    highlight: pango
+    highlight_downlit: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(tidy = TRUE, eval = FALSE, echo = TRUE, cache = TRUE, tidy.opts = list(width.cutoff=70))
+```
+
+# Introdução
+
+O DATASUS, braço tecnológico do Ministério da Saúde, disponibiliza uma vasta quantidade de informações sobre diversos aspectos do Serviço Unificado de Saúde (SUS). Muitos destes arquivos são disponibilizados em um formato *dbc*, que é um "compressed DBF".
+
+Estes arquivos são disponibilizados no site de [FTP](ftp://ftp.datasus.gov.br/dissemin/publicos/) do DATASUS. Para fins deste pequeno experimento, todos os arquivos foram baixados e estão na máquina local.
+
+O objetivo deste pequeno estudo é experimentar técnicas de paralelização no R para acelerar a leitura dos arquivos.
+
+>> **Nem sempre operações de I/O em paralelo trazem ganho de velocidade** especialmente em se tratando de discos rígidos por rotação (os tradicionais), isto porque a operação de busca nestes discos pode incorrer em penalização. Entretanto, neste experimento, obtivemos um bom resultado com a leitura em paralelo.
+
+**Carregando as bibliotecas**
+
+```{r bibliotecas, message=FALSE,warning=FALSE}
+library(tidyverse)
+library(read.dbc)
+library(data.table)
+library(microbenchmark)
+library(parallel)
+```
+
+## Listando todos os arquivos das APACS no diretório
+
+Todos os arquivos das APACs foram baixados do site FTP do DATASUS.
+
+```{r ftpdir}
+diretorio <- "~/datasets/datasus.gov.br/SIASUS/PA-LaudosDiversos/"
+```
+
+### Selecionando os arquivos de Acre e Alagoras, de 2008 a 2012
+
+```{r acal}
+PREF <- "PA"
+# indique o estado ou "" para todos os estados
+UF <- "(AC|AL)" 
+MESES <- "(\\d\\d)"
+ANO <- "(08|09|10|11|12)"
+```
+
+
+```{r acalarqs}
+arquivos <- list.files(diretorio, paste0(PREF,UF,ANO,MESES,".*.dbc"))
+```
+
+No total, selecionamos 120 arquivos.
+
+```
+$ ls -ltr PA{AC,AL}{08,09,10,11,12}* | wc
+    120    1080    7560
+
+$ ls -ltr PA{AC,AL}{08,09,10,11,12}* | awk '{total += $5}; END {print total}'
+523484797
+```
+
+Ou seja, para estes 120 arquivos, temos um total de 523.484.797 bytes, i.e., pouco mais de 500MB.
+
+Número de cores disponíveis para processamento paralelo. Esta é uma máquina em uma nuvem privada.
+
+```{r}
+(numCores <- detectCores())
+```
+```
+[1] 32
+```
+
+A função `makeCluster` é utilizada para criar o nosso cluster virtual de processamento paralelo.
+
+```{r}
+cluster <- makeCluster(numCores)
+```
+
+
+Criando uma lista com os nomes completos dos arquivos (com o diretório).
+
+```{r}
+fNames <- lapply(arquivos, function(x) {paste0(diretorio,x)})
+arqs <- NULL
+```
+
+### Leitura de 12 arquivos em modo serial
+
+```{r eval=FALSE}
+ptimes <- system.time(arqserial <- lapply(fNames[1:12], read.dbc))
+ptimes[3]
+```
+```
+elapsed 
+  7.222  
+```
+Limpando a memória
+
+```{r eval=FALSE}
+arqserial <- NULL
+rm(arqserial)
+```
+
+### Leitura de 120 arquivos em modo paralelo
+
+A função `mclapply` é o equivalente paralelo da função `lapply` que utilizamos acima. `mclapply` faz parte do pacote **parallel** é muito conveniente para uma paralelização trivial de operações que envolvam listas.
+
+```{r}
+library(parallel)
+```
+
+<!--
+Infelizmente, o pedaço de código abaixo não está sendo executado na renderização do html pelo `knitr`, embora rode perfeitamente quando executado manualmente. O erro apresentado é:
+
+```
+Error in lazyLoadDBinsertVariable(vars[i], from, datafile, ascii, compress,  : 
+  long vectors not supported yet: connections.c:5984
+Calls: <Anonymous> ... <Anonymous> -> <Anonymous> -> lazyLoadDBinsertVariable
+Execution halted
+```
+Ainda não consegui encontrar solução; então vou pegar o resultado da execução manual para apresentar aqui.
+
+-->
+
+```{r eval=FALSE}
+ptime <- system.time(arqs <- parallel::mclapply(fNames, read.dbc, mc.cores = numCores))
+ptime[3]
+```
+```
+elapsed 
+ 34.175 
+```
+
+
+O tempo para leitura de apenas 12 arquivos foi 7.222 segundos, enquanto o tempo para a leitura de 120 arquivos em paralelo foi 34.175 segundos. Um excelente ganho de velocidade com a leitura paralela.
+
+>> É importante ressaltar que os arquivos destes dois estados são pequenos. Mesmo esta quantidade de arquivos (120) não comprometeu a memória da máquina. Nem sempre isso ocorre. É preciso tomar cuidado!
+
+
+
+### Selecionando os arquivos de São Paulo, de 2010 a 2016
+
+Os arquivos de São Paulo são muito maiores que os dos outros estados, de modo que constituem um desafio maior ainda para uma leitura em paralelo: otimizar esta leitura é essencial!
+
+```{r sp}
+PREF <- "PA"
+# indique o estado ou "" para todos os estados
+UF <- "SP" 
+MESES <- "(\\d\\d)"
+ANO <- "(10|11|12|13|14|15|16)"
+```
+
+
+```{r sparqs}
+arquivos <- list.files(diretorio, paste0(PREF,UF,ANO,MESES,".*.dbc"))
+```
+
+No total, selecionamos 133 arquivos.
+
+```
+$ ls -ltr PASP{10,11,12,13,14,15,16}* | wc
+    133    1197    8610
+$ ls -ltr PASP{10,11,12,13,14,15,16}* | awk '{total += $5}; END {print total}'
+1.05298e+10
+```
+
+Como podemos ver, o tamanho dos arquivos é muito maior; os 133 arquivos totalizam aproximadamente 10529800000 bytes, i.e., 10.529.800.000 bytes, ou 10GB.
+
+Como o formato `dbc` é um formato comprimido, quando fazemos a leitura cada data.frame fica bem maior.
+
+```{r eval = FALSE}
+f1 <- read.dbc(paste0(diretorio,arquivos[1]))
+```
+```{r eval=FALSE}
+object.size(f1)
+```
+```
+824834376 bytes
+```
+
+Aproximadamente 800MB.
+
+Em disco, este arquivo tem aproximadamente 88MB:
+
+```
+$ ls -shc PASP1001.dbc
+88M PASP1001.dbc
+```
+
+Ou seja, quase 10 vezes maior o tamanho em memória em relação ao tamanho em disco.
+
+Criando uma lista com os nomes completos dos arquivos (com o diretório).
+
+```{r}
+fNames <- lapply(arquivos, function(x) {paste0(diretorio,x)})
+arqs <- NULL
+```
+
+### Leitura de 12 arquivos em modo serial
+
+```{r eval=FALSE}
+ptimes <- system.time(arqserial <- lapply(fNames[1:12], read.dbc))
+ptimes[3]
+```
+```
+elapsed 
+845.107 
+```
+
+Realmente, os arquivos do Estado de São Paulo são muito maiores do que dos outros estados.
+
+### Leitura de 12 arquivos em modo paralelo
+
+A função `mclapply` é o equivalente paralelo da função `lapply` que utilizamos acima. `mclapply` faz parte do pacote **parallel** é muito conveniente para uma paralelização trivial de operações que envolvam listas.
+
+```{r}
+library(parallel)
+```
+
+Vou usar 12 arquivos diferentes para não correr o risco de cache do SO.
+
+```{r eval=FALSE}
+ptime <- system.time(arqs <- parallel::mclapply(fNames[13:24], read.dbc, mc.cores = numCores))
+ptime[3]
+```
+```
+elapsed 
+167.033 
+```
+
+A leitura em paralelo teve uma redução significativa no tempo; o *speedup* ($\frac{temposerial}{tempoparalelo}$) resulta em 5.06.
+
+Apesar de esta máquina ter 32 cores e uma boa quantidade de memória RAM (128GB), ao tentar executar o `mclapply` com todos os 133 arquivos, *travou* a máquina. Estes 133 arquivos tem um tamanho em disco de quase 10GB; considerando uma razão de 10 vezes o tamanho em memória, chegaríamos a quase 100GB; mais os buffers de leitura, etc., esgotamos a memória da máquina e vamos para o *swap*.
+
+Assim, é prudente executar em grupos de 10-12 arquivos para não incorrer no uso de *swap*, o que faz com que a máquina fique praticamente inacessível.
+

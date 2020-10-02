@@ -8,12 +8,20 @@
 Outras tecnologias, ferramentas e linguagens também.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 01 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 02 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Paralelizando a leitura de muitos arquivos no R</title>
+      <dc:creator>Mario O. de Menezes</dc:creator>
+      <link>https://momenezes.github.io/tutorials/posts/2020-10-02-paralelizando-a-leitura-de-muitos-arquivos</link>
+      <description>Acelerando a leitura de muitos de arquivos no R para posterior processamento.</description>
+      <guid>https://momenezes.github.io/tutorials/posts/2020-10-02-paralelizando-a-leitura-de-muitos-arquivos</guid>
+      <pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Concatenando data.frames</title>
       <dc:creator>Mario O. de Menezes</dc:creator>
       <link>https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes</link>
-      <description>Como juntar os diversos arquivos .dbc do DATASUS em um data.frame.</description>
+      <description>Como juntar os diversos arquivos .dbc do DATASUS em um data.frame; comparação de tempos de processamento e bibliotecas.</description>
       <guid>https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes</guid>
       <pubDate>Thu, 01 Oct 2020 00:00:00 +0000</pubDate>
     </item>

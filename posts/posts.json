@@ -1,8 +1,24 @@
 [
   {
+    "path": "posts/2020-10-02-paralelizando-a-leitura-de-muitos-arquivos/",
+    "title": "Paralelizando a leitura de muitos arquivos no R",
+    "description": "Acelerando a leitura de muitos de arquivos no R para posterior processamento.",
+    "author": [
+      {
+        "name": "Mario O. de Menezes",
+        "url": "https://momenezes.github.io/tutorials"
+      }
+    ],
+    "date": "2020-10-02",
+    "categories": [],
+    "preview": {},
+    "last_modified": "2020-10-02T20:25:17-03:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2020-10-01-concatenando-dataframes/",
     "title": "Concatenando data.frames",
-    "description": "Como juntar os diversos arquivos .dbc do DATASUS em um data.frame.",
+    "description": "Como juntar os diversos arquivos .dbc do DATASUS em um data.frame; comparação de tempos de processamento e bibliotecas.",
     "author": [
       {
         "name": "Mario O. de Menezes",
@@ -12,7 +28,7 @@
     "date": "2020-10-01",
     "categories": [],
     "preview": {},
-    "last_modified": "2020-10-01T18:17:54-03:00",
+    "last_modified": "2020-10-02T09:51:43-03:00",
     "input_file": {}
   }
 ]

@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 public
+_posts/**/*_cache/**
+_posts/**/*_files/**
