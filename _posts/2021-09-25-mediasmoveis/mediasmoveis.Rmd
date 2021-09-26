@@ -13,20 +13,7 @@ output:
     highlight: tango
 ---
 
-```{css, echo=FALSE}
-.main-container {
-    max-width: 600px !important;
-}
 
-pre {
-  max-height: 800px !important;
-  overflow-y: auto !important;
-  overflow-x: scroll !important;
-}
-pre code {
-  white-space: pre
-}
-```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = TRUE, R.options = list(width = 60))
