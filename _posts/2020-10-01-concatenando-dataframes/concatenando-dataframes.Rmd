@@ -5,12 +5,12 @@ description: |
 author:
   - name: Mario O. de Menezes
     url: https://momenezes.github.io/tutorials
+    orcid_id: 0000-0003-0263-3541
 date: 10-01-2020
 output:
   distill::distill_article:
     self_contained: false
-    highlight: pango
-    highlight_downlit: false
+    highlight: tango
 ---
 
 ```{r setup, include=FALSE}
@@ -68,7 +68,10 @@ vars_to_keep = c("PA_CODUNI","PA_UFMUN","PA_TPUPS","PA_TIPPRE", "PA_CNPJCPF",  "
 #### Tempo de leitura dos arquivos (em segundos)
 
 ```{r readingmgrj, cache = TRUE}
-timeMGRJ4arqs <- system.time({f1 <- read.dbc(paste0(diretorio,arquivos[1])); f2 <- read.dbc(paste0(diretorio,arquivos[2])); f3 <- read.dbc(paste0(diretorio,arquivos[3])); f4 <- read.dbc(paste0(diretorio,arquivos[4]));})
+timeMGRJ4arqs <- system.time({f1 <- read.dbc(paste0(diretorio,arquivos[1])); 
+f2 <- read.dbc(paste0(diretorio,arquivos[2])); 
+f3 <- read.dbc(paste0(diretorio,arquivos[3])); 
+f4 <- read.dbc(paste0(diretorio,arquivos[4]));})
 timeMGRJ4arqs
 ```
 #### Montando uma lista de data.frames
@@ -245,7 +248,10 @@ arquivos <- list.files(diretorio, paste0(PREF,UF,ANO,MESES,".*.dbc"))
 #### Tempo de leitura dos arquivos (em segundos)
 
 ```{r readingsp, cache = TRUE}
-timeSP4arqs <- system.time({f1 <- read.dbc(paste0(diretorio,arquivos[1])); f2 <- read.dbc(paste0(diretorio,arquivos[2])); f3 <- read.dbc(paste0(diretorio,arquivos[3])); f4 <- read.dbc(paste0(diretorio,arquivos[4]));})
+timeSP4arqs <- system.time({f1 <- read.dbc(paste0(diretorio,arquivos[1])); 
+f2 <- read.dbc(paste0(diretorio,arquivos[2])); 
+f3 <- read.dbc(paste0(diretorio,arquivos[3])); 
+f4 <- read.dbc(paste0(diretorio,arquivos[4]));})
 timeSP4arqs
 ```
 #### Montando a lista de data.frames

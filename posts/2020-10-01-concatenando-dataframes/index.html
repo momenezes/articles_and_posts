@@ -18,12 +18,78 @@
  <!--radix_placeholder_import_source-->
  <!--/radix_placeholder_import_source-->
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
   <!--radix_placeholder_meta_tags-->
 <title>Alguns Tutoriais: Concatenando data.frames</title>
 
 <meta property="description" itemprop="description" content="Como juntar os diversos arquivos .dbc do DATASUS em um data.frame; comparação de tempos de processamento e bibliotecas."/>
 
 <link rel="canonical" href="https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes/"/>
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
 
 <!--  https://schema.org/Article -->
 <meta property="article:published" itemprop="datePublished" content="2020-10-01"/>
@@ -47,6 +113,7 @@
 <!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
 <meta name="citation_title" content="Alguns Tutoriais: Concatenando data.frames"/>
 <meta name="citation_fulltext_html_url" content="https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes/"/>
+<meta name="citation_fulltext_world_readable" content=""/>
 <meta name="citation_online_date" content="2020/10/01"/>
 <meta name="citation_publication_date" content="2020/10/01"/>
 <meta name="citation_author" content="Mario O. de Menezes"/>
@@ -54,14 +121,15 @@
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["Concatenando data.frames"]},{"type":"character","attributes":{},"value":["Como juntar os diversos arquivos .dbc do DATASUS em um data.frame; comparação de tempos de processamento e bibliotecas."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Mario O. de Menezes"]},{"type":"character","attributes":{},"value":["https://momenezes.github.io/tutorials"]}]}]},{"type":"character","attributes":{},"value":["10-01-2020"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","highlight","highlight_downlit"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["pango"]},{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes/"]},{"type":"character","attributes":{},"value":["https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes/"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","author","date","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Concatenando data.frames"]},{"type":"character","attributes":{},"value":["Como juntar os diversos arquivos .dbc do DATASUS em um data.frame; comparação de tempos de processamento e bibliotecas."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","orcid_id"]}},"value":[{"type":"character","attributes":{},"value":["Mario O. de Menezes"]},{"type":"character","attributes":{},"value":["https://momenezes.github.io/tutorials"]},{"type":"character","attributes":{},"value":["0000-0003-0263-3541"]}]}]},{"type":"character","attributes":{},"value":["10-01-2020"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","highlight"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["tango"]}]}]},{"type":"character","attributes":{},"value":["https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes/"]},{"type":"character","attributes":{},"value":["https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes/"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["APACSSPdplyr.CSV","APACSSPdt.CSV","concatenando-dataframes_files/bowser-1.9.3/bowser.min.js","concatenando-dataframes_files/distill-2.2.21/template.v2.js","concatenando-dataframes_files/jquery-1.11.3/jquery.min.js","concatenando-dataframes_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["APACSSPdplyr.CSV","APACSSPdt.CSV","concatenando-dataframes_files/anchor-4.2.2/anchor.min.js","concatenando-dataframes_files/bowser-1.9.3/bowser.min.js","concatenando-dataframes_files/distill-2.2.21/template.v2.js","concatenando-dataframes_files/header-attrs-2.11/header-attrs.js","concatenando-dataframes_files/jquery-1.11.3/jquery.min.js","concatenando-dataframes_files/jquery-3.6.0/jquery-3.6.0.js","concatenando-dataframes_files/jquery-3.6.0/jquery-3.6.0.min.js","concatenando-dataframes_files/jquery-3.6.0/jquery-3.6.0.min.map","concatenando-dataframes_files/popper-2.6.0/popper.min.js","concatenando-dataframes_files/tippy-6.2.7/tippy-bundle.umd.min.js","concatenando-dataframes_files/tippy-6.2.7/tippy.css","concatenando-dataframes_files/tippy-6.2.7/tippy-light-border.css","concatenando-dataframes_files/tippy-6.2.7/tippy.umd.min.js","concatenando-dataframes_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
+<meta name="distill:offset" content="../.."/>
 
 <script type="application/javascript">
 
@@ -73,6 +141,7 @@
     var header = $('header').get(0);
     var headerHeight = header.offsetHeight;
     var headroom = new Headroom(header, {
+      tolerance: 5,
       onPin : function() {
         if (window.headroom_prevent_pin) {
           window.headroom_prevent_pin = false;
@@ -121,7 +190,7 @@
 
 .distill-site-nav {
   color: rgba(255, 255, 255, 0.8);
-  background-color: #455a64;
+  background-color: #0F2E3D;
   font-size: 15px;
   font-weight: 300;
 }
@@ -184,6 +253,7 @@
 
 .distill-site-header .title {
   font-size: 18px;
+  min-width: 150px;
 }
 
 .distill-site-header .logo {
@@ -325,7 +395,7 @@
 
 
 @media screen and (max-width: 768px) {
-  .distill-site-header.responsive {position: relative;}
+  .distill-site-header.responsive {position: relative; min-height: 500px; }
   .distill-site-header.responsive a.nav-toggle {
     position: absolute;
     right: 0;
@@ -394,11 +464,277 @@ d-title {
   top: 0;
 }
 
+/* adjust viewport for navbar height */
+/* helps vertically center bootstrap (non-distill) content */
+.min-vh-100 {
+  min-height: calc(100vh - 100px) !important;
+}
+
 </style>
 
+<script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="../../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
 <link href="../../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
 <script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
+<script src="../../site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+<script src="../../site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+<script type="application/javascript">
+
+function getMeta(metaName) {
+  var metas = document.getElementsByTagName('meta');
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+  return '';
+}
+
+function offsetURL(url) {
+  var offset = getMeta('distill:offset');
+  return offset ? offset + '/' + url : url;
+}
+
+function createFuseIndex() {
+
+  // create fuse index
+  var options = {
+    keys: [
+      { name: 'title', weight: 20 },
+      { name: 'categories', weight: 15 },
+      { name: 'description', weight: 10 },
+      { name: 'contents', weight: 5 },
+    ],
+    ignoreLocation: true,
+    threshold: 0
+  };
+  var fuse = new window.Fuse([], options);
+
+  // fetch the main search.json
+  return fetch(offsetURL('search.json'))
+    .then(function(response) {
+      if (response.status == 200) {
+        return response.json().then(function(json) {
+          // index main articles
+          json.articles.forEach(function(article) {
+            fuse.add(article);
+          });
+          // download collections and index their articles
+          return Promise.all(json.collections.map(function(collection) {
+            return fetch(offsetURL(collection)).then(function(response) {
+              if (response.status === 200) {
+                return response.json().then(function(articles) {
+                  articles.forEach(function(article) {
+                    fuse.add(article);
+                  });
+                })
+              } else {
+                return Promise.reject(
+                  new Error('Unexpected status from search index request: ' +
+                            response.status)
+                );
+              }
+            });
+          })).then(function() {
+            return fuse;
+          });
+        });
+
+      } else {
+        return Promise.reject(
+          new Error('Unexpected status from search index request: ' +
+                      response.status)
+        );
+      }
+    });
+}
+
+window.document.addEventListener("DOMContentLoaded", function (event) {
+
+  // get search element (bail if we don't have one)
+  var searchEl = window.document.getElementById('distill-search');
+  if (!searchEl)
+    return;
+
+  createFuseIndex()
+    .then(function(fuse) {
+
+      // make search box visible
+      searchEl.classList.remove('hidden');
+
+      // initialize autocomplete
+      var options = {
+        autoselect: true,
+        hint: false,
+        minLength: 2,
+      };
+      window.autocomplete(searchEl, options, [{
+        source: function(query, callback) {
+          const searchOptions = {
+            isCaseSensitive: false,
+            shouldSort: true,
+            minMatchCharLength: 2,
+            limit: 10,
+          };
+          var results = fuse.search(query, searchOptions);
+          callback(results
+            .map(function(result) { return result.item; })
+          );
+        },
+        templates: {
+          suggestion: function(suggestion) {
+            var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+              ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+              : '';
+            var html = `
+              <div class="search-item">
+                <h3>${suggestion.title}</h3>
+                <div class="search-item-description">
+                  ${suggestion.description || ''}
+                </div>
+                <div class="search-item-preview">
+                  ${img}
+                </div>
+              </div>
+            `;
+            return html;
+          }
+        }
+      }]).on('autocomplete:selected', function(event, suggestion) {
+        window.location.href = offsetURL(suggestion.path);
+      });
+      // remove inline display style on autocompleter (we want to
+      // manage responsive display via css)
+      $('.algolia-autocomplete').css("display", "");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+});
+
+</script>
+
+<style type="text/css">
+
+.nav-search {
+  font-size: x-small;
+}
+
+/* Algolioa Autocomplete */
+
+.algolia-autocomplete {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: sub;
+  background-color: white;
+  color: black;
+  padding: 6px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  border-radius: 6px;
+  border: 1px #0F2E3D solid;
+  width: 180px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-nav .algolia-autocomplete {
+    display: none;
+    visibility: hidden;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete {
+    display: inline-block;
+    visibility: visible;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+    margin-left: 0;
+    width: 400px;
+    max-height: 400px;
+  }
+}
+
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 550px;
+  max-height: 70vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+  padding: 5px;
+  margin-top: 3px;
+  margin-left: -150px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #999;
+  border-top: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+  font-size: 1rem;
+  margin-block-start: 0;
+  margin-block-end: 5px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+  display: inline-block;
+  overflow: hidden;
+  height: 2.8em;
+  width: 80%;
+  margin-right: 4%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+  display: inline-block;
+  width: 15%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+  height: 3em;
+  width: auto;
+  display: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+  display: initial;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #eee;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+</style>
+
+
 <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -422,6 +758,51 @@ body {
 
 .pagedtable-footer {
   font-size: 15px;
+}
+
+d-byline .byline {
+  grid-template-columns: 2fr 2fr;
+}
+
+d-byline .byline h3 {
+  margin-block-start: 1.5em;
+}
+
+d-byline .byline .authors-affiliations h3 {
+  margin-block-start: 0.5em;
+}
+
+.authors-affiliations .orcid-id {
+  width: 16px;
+  height:16px;
+  margin-left: 4px;
+  margin-right: 4px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+
+d-title .dt-tags {
+  margin-top: 1em;
+  grid-column: text;
+}
+
+.dt-tags .dt-tag {
+  text-decoration: none;
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0em 0.4em;
+  margin-right: 0.5em;
+  margin-bottom: 0.4em;
+  font-size: 70%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+d-article table.gt_table td,
+d-article table.gt_table th {
+  border-bottom: none;
 }
 
 .html-widget {
@@ -463,6 +844,7 @@ body {
 }
 
 d-article {
+  padding-top: 2.5rem;
   padding-bottom: 30px;
 }
 
@@ -474,91 +856,48 @@ d-article>p>img {
   width: 100%;
 }
 
+d-article h2 {
+  margin: 1rem 0 1.5rem 0;
+}
+
+d-article h3 {
+  margin-top: 1.5rem;
+}
+
 d-article iframe {
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 2.0em;
   width: 100%;
 }
 
-figure img.external {
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
-  padding: 18px;
-  box-sizing: border-box;
+/* Tweak code blocks */
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
-/* CSS for table of contents */
-
-.d-toc {
-  color: rgba(0,0,0,0.8);
-  font-size: 0.8em;
-  line-height: 1em;
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: auto;
 }
 
-.d-toc-header {
-  font-size: 0.6rem;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.5);
-  text-transform: uppercase;
-  margin-top: 0;
-  margin-bottom: 1.3em;
+d-article div.sourceCode {
+  background-color: white;
 }
 
-.d-toc a {
-  border-bottom: none;
-}
-
-.d-toc ul {
-  padding-left: 0;
-}
-
-.d-toc li>ul {
-  padding-top: 0.8em;
-  padding-left: 16px;
-  margin-bottom: 0.6em;
-}
-
-.d-toc ul,
-.d-toc li {
-  list-style-type: none;
-}
-
-.d-toc li {
-  margin-bottom: 0.9em;
-}
-
-.d-toc-separator {
-  margin-top: 20px;
-  margin-bottom: 2em;
-}
-
-.d-article-with-toc {
-  border-top: none;
-  padding-top: 0;
-}
-
-
-
-/* Tweak code blocks (note that this CSS is repeated above in an injection
-   into the d-code shadow dom) */
-
-d-code {
-  overflow-x: auto !important;
-}
-
-pre.d-code code.d-code {
+d-article div.sourceCode pre {
   padding-left: 10px;
   font-size: 12px;
   border-left: 2px solid rgba(0,0,0,0.1);
 }
 
-pre.text-output {
-
+d-article pre {
   font-size: 12px;
   color: black;
   background: none;
-  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  margin-top: 0;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -576,20 +915,128 @@ pre.text-output {
   hyphens: none;
 }
 
+d-article pre a {
+  border-bottom: none;
+}
+
+d-article pre a:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+d-article details {
+  grid-column: text;
+  margin-bottom: 0.8em;
+}
+
 @media(min-width: 768px) {
 
-d-code {
-  overflow-x: visible !important;
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: visible !important;
 }
 
-pre.d-code code.d-code  {
-    padding-left: 18px;
-    font-size: 14px;
-}
-pre.text-output {
+d-article div.sourceCode pre {
+  padding-left: 18px;
   font-size: 14px;
 }
+
+d-article pre {
+  font-size: 14px;
 }
+
+}
+
+figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* CSS for d-contents */
+
+.d-contents {
+  grid-column: text;
+  color: rgba(0,0,0,0.8);
+  font-size: 0.9em;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  padding-left: 0.25em;
+  justify-self: start;
+}
+
+@media(min-width: 1000px) {
+  .d-contents.d-contents-float {
+    height: 0;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    justify-self: center;
+    padding-right: 3em;
+    padding-left: 2em;
+  }
+}
+
+.d-contents nav h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.d-contents li {
+  list-style-type: none
+}
+
+.d-contents nav > ul {
+  padding-left: 0;
+}
+
+.d-contents ul {
+  padding-left: 1em
+}
+
+.d-contents nav ul li {
+  margin-top: 0.6em;
+  margin-bottom: 0.2em;
+}
+
+.d-contents nav a {
+  font-size: 13px;
+  border-bottom: none;
+  text-decoration: none
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.d-contents nav a:hover {
+  text-decoration: underline solid rgba(0, 0, 0, 0.6)
+}
+
+.d-contents nav > ul > li > a {
+  font-weight: 600;
+}
+
+.d-contents nav > ul > li > ul {
+  font-weight: inherit;
+}
+
+.d-contents nav > ul > li > ul > li {
+  margin-top: 0.2em;
+}
+
+
+.d-contents nav ul {
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+.d-article-with-toc h2:nth-child(2) {
+  margin-top: 0;
+}
+
 
 /* Figure */
 
@@ -627,6 +1074,27 @@ pre.text-output {
   color: rgba(0, 0, 0, 1.0);
 }
 
+/* Citations */
+
+d-article .citation {
+  color: inherit;
+  cursor: inherit;
+}
+
+div.hanging-indent{
+  margin-left: 1em; text-indent: -1em;
+}
+
+/* Citation hover box */
+
+.tippy-box[data-theme~=light-border] {
+  background-color: rgba(250, 250, 250, 0.95);
+}
+
+.tippy-content > p {
+  margin-bottom: 0;
+  padding: 2px;
+}
 
 
 /* Tweak 1000px media break to show more text */
@@ -702,6 +1170,91 @@ d-appendix .citation-appendix,
   word-wrap: break-word;
 }
 
+/* Include appendix styles here so they can be overridden */
+
+d-appendix {
+  contain: layout style;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-top: 60px;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0,0,0,0.5);
+  padding-top: 60px;
+  padding-bottom: 48px;
+}
+
+d-appendix h3 {
+  grid-column: page-start / text-start;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.65);
+}
+
+d-appendix h3 + * {
+  margin-top: 1em;
+}
+
+d-appendix ol {
+  padding: 0 0 0 15px;
+}
+
+@media (min-width: 768px) {
+  d-appendix ol {
+    padding: 0 0 0 30px;
+    margin-left: -30px;
+  }
+}
+
+d-appendix li {
+  margin-bottom: 1em;
+}
+
+d-appendix a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+d-appendix > * {
+  grid-column: text;
+}
+
+d-appendix > d-footnote-list,
+d-appendix > d-citation-list,
+d-appendix > distill-appendix {
+  grid-column: screen;
+}
+
+/* Include footnote styles here so they can be overridden */
+
+d-footnote-list {
+  contain: layout style;
+}
+
+d-footnote-list > * {
+  grid-column: text;
+}
+
+d-footnote-list a.footnote-backlink {
+  color: rgba(0,0,0,0.3);
+  padding-left: 0.5em;
+}
+
+
+
+/* Anchor.js */
+
+.anchorjs-link {
+  /*transition: all .25s linear; */
+  text-decoration: none;
+  border-bottom: none;
+}
+*:hover > .anchorjs-link {
+  margin-left: -1.125em !important;
+  text-decoration: none;
+  border-bottom: none;
+}
 
 /* Social footer */
 
@@ -756,6 +1309,211 @@ d-appendix .citation-appendix,
 
 .custom p {
   margin-bottom: 0.5em;
+}
+
+/* Styles for listing layout (hide title) */
+.layout-listing d-title, .layout-listing .d-title {
+  display: none;
+}
+
+/* Styles for posts lists (not auto-injected) */
+
+
+.posts-with-sidebar {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.posts-list .description h2,
+.posts-list .description p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.posts-list .description h2 {
+  font-weight: 700;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.posts-list h2.post-tag {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 12px;
+}
+.posts-list {
+  margin-top: 60px;
+  margin-bottom: 24px;
+}
+
+.posts-list .post-preview {
+  text-decoration: none;
+  overflow: hidden;
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 24px 0;
+}
+
+.post-preview-last {
+  border-bottom: none !important;
+}
+
+.posts-list .posts-list-caption {
+  grid-column: screen;
+  font-weight: 400;
+}
+
+.posts-list .post-preview h2 {
+  margin: 0 0 6px 0;
+  line-height: 1.2em;
+  font-style: normal;
+  font-size: 24px;
+}
+
+.posts-list .post-preview p {
+  margin: 0 0 12px 0;
+  line-height: 1.4em;
+  font-size: 16px;
+}
+
+.posts-list .post-preview .thumbnail {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  position: relative;
+  max-width: 500px;
+}
+.posts-list .post-preview img {
+  width: 100%;
+  display: block;
+}
+
+.posts-list .metadata {
+  font-size: 12px;
+  line-height: 1.4em;
+  margin-bottom: 18px;
+}
+
+.posts-list .metadata > * {
+  display: inline-block;
+}
+
+.posts-list .metadata .publishedDate {
+  margin-right: 2em;
+}
+
+.posts-list .metadata .dt-authors {
+  display: block;
+  margin-top: 0.3em;
+  margin-right: 2em;
+}
+
+.posts-list .dt-tags {
+  display: block;
+  line-height: 1em;
+}
+
+.posts-list .dt-tags .dt-tag {
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0.3em 0.4em;
+  margin-right: 0.2em;
+  margin-bottom: 0.4em;
+  font-size: 60%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.posts-list img {
+  opacity: 1;
+}
+
+.posts-list img[data-src] {
+  opacity: 0;
+}
+
+.posts-more {
+  clear: both;
+}
+
+
+.posts-sidebar {
+  font-size: 16px;
+}
+
+.posts-sidebar h3 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+.categories ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories li {
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 0;
+}
+
+.categories li>a {
+  border-bottom: none;
+}
+
+.categories li>a:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.categories .active {
+  font-weight: 600;
+}
+
+.categories .category-count {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+
+@media(min-width: 768px) {
+  .posts-list .post-preview h2 {
+    font-size: 26px;
+  }
+  .posts-list .post-preview .thumbnail {
+    float: right;
+    width: 30%;
+    margin-bottom: 0;
+  }
+  .posts-list .post-preview .description {
+    float: left;
+    width: 45%;
+  }
+  .posts-list .post-preview .metadata {
+    float: left;
+    width: 20%;
+    margin-top: 8px;
+  }
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.5em;
+    font-size: 16px;
+  }
+  .posts-with-sidebar .posts-list {
+    float: left;
+    width: 75%;
+  }
+  .posts-with-sidebar .posts-sidebar {
+    float: right;
+    width: 20%;
+    margin-top: 60px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
 }
 
 
@@ -887,6 +1645,12 @@ d-appendix .citation-appendix,
   hyphens: none;
 }
 
+.downlevel .posts-list .post-preview {
+  color: inherit;
+}
+
+
+
 </style>
 
 <script type="application/javascript">
@@ -902,6 +1666,13 @@ function is_downlevel_browser() {
 
 // show body when load is complete
 function on_load_complete() {
+
+  // add anchors
+  if (window.anchors) {
+    window.anchors.options.placement = 'left';
+    window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+  }
+
 
   // set body to visible
   document.body.style.visibility = 'visible';
@@ -948,23 +1719,8 @@ function init_distill() {
   // create d-appendix
   $('.d-appendix').changeElementType('d-appendix');
 
-  // create d-bibliography
-  var bibliography = $('<d-bibliography></d-bibliography>');
-  $('#distill-bibliography').wrap(bibliography);
-
   // flag indicating that we have appendix items
   var appendix = $('.appendix-bottom').children('h3').length > 0;
-
-  // replace citations with <d-cite>
-  $('.citation').each(function(i, val) {
-    appendix = true;
-    var cites = $(this).attr('data-cites').split(" ");
-    var dt_cite = $('<d-cite></d-cite>');
-    dt_cite.attr('key', cites.join());
-    $(this).replaceWith(dt_cite);
-  });
-  // remove refs
-  $('#refs').remove();
 
   // replace footnotes with <d-footnote>
   $('.footnote-ref').each(function(i, val) {
@@ -982,39 +1738,21 @@ function init_distill() {
   // remove footnotes
   $('.footnotes').remove();
 
+  // move refs into #references-listing
+  $('#references-listing').replaceWith($('#refs'));
+
   $('h1.appendix, h2.appendix').each(function(i, val) {
     $(this).changeElementType('h3');
   });
   $('h3.appendix').each(function(i, val) {
     var id = $(this).attr('id');
-    $('.d-toc a[href="#' + id + '"]').parent().remove();
+    $('.d-contents a[href="#' + id + '"]').parent().remove();
     appendix = true;
     $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
   });
 
   // show d-appendix if we have appendix content
   $("d-appendix").css('display', appendix ? 'grid' : 'none');
-
-  // replace code blocks with d-code
-  $('pre>code').each(function(i, val) {
-    var code = $(this);
-    var pre = code.parent();
-    var clz = "";
-    var language = pre.attr('class');
-    if (language) {
-      // map unknown languages to "clike" (without this they just dissapear)
-      if ($.inArray(language, ["bash", "clike", "css", "go", "html",
-                               "javascript", "js", "julia", "lua", "markdown",
-                               "markup", "mathml", "python", "svg", "xml"]) == -1)
-        language = "clike";
-      language = ' language="' + language + '"';
-      var dt_code = $('<d-code block' + language + clz + '></d-code>');
-      dt_code.text(code.text());
-      pre.replaceWith(dt_code);
-    } else {
-      code.addClass('text-output').unwrap().changeElementType('pre');
-    }
-  });
 
   // localize layout chunks to just output
   $('.layout-chunk').each(function(i, val) {
@@ -1023,7 +1761,7 @@ function init_distill() {
     var layout = $(this).attr('data-layout');
 
     // apply layout to markdown level block elements
-    var elements = $(this).children().not('d-code, pre.text-output, script');
+    var elements = $(this).children().not('details, div.sourceCode, pre, script');
     elements.each(function(i, el) {
       var layout_div = $('<div class="' + layout + '"></div>');
       if (layout_div.hasClass('shaded')) {
@@ -1040,6 +1778,13 @@ function init_distill() {
     $(this).children().unwrap();
   });
 
+  // remove code block used to force  highlighting css
+  $('.distill-force-highlighting-css').parent().remove();
+
+  // remove empty line numbers inserted by pandoc when using a
+  // custom syntax highlighting theme
+  $('code.sourceCode a:empty').remove();
+
   // load distill framework
   load_distill_framework();
 
@@ -1055,12 +1800,26 @@ function init_distill() {
     if (!have_authors)
       $('d-byline').addClass('hidden');
 
-    // table of contents
-    if (have_authors) // adjust border if we are in authors
-      $('.d-toc').parent().addClass('d-article-with-toc');
+    // article with toc class
+    $('.d-contents').parent().addClass('d-article-with-toc');
 
     // strip links that point to #
     $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+    // add orcid ids
+    $('.authors-affiliations').find('.author').each(function(i, el) {
+      var orcid_id = front_matter.authors[i].orcidID;
+      if (orcid_id) {
+        var a = $('<a></a>');
+        a.attr('href', 'https://orcid.org/' + orcid_id);
+        var img = $('<img></img>');
+        img.addClass('orcid-id');
+        img.attr('alt', 'ORCID ID');
+        img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+        a.append(img);
+        $(this).append(a);
+      }
+    });
 
     // hide elements of author/affiliations grid that have no value
     function hide_byline_column(caption) {
@@ -1110,18 +1869,27 @@ function init_distill() {
       grid.children('h3:contains("Affiliations")').text('Affiliation');
     }
 
-    // inject pre code styles (can't do this with a global stylesheet b/c a shadow root is used)
-    $('d-code').each(function(i, val) {
-      var style = document.createElement('style');
-      style.innerHTML = 'pre code { padding-left: 10px; font-size: 12px; border-left: 2px solid rgba(0,0,0,0.1); } ' +
-                        '@media(min-width: 768px) { pre code { padding-left: 18px; font-size: 14px; } }';
-      if (this.shadowRoot)
-        this.shadowRoot.appendChild(style);
-    });
+    // remove d-appendix and d-footnote-list local styles
+    $('d-appendix > style:first-child').remove();
+    $('d-footnote-list > style:first-child').remove();
 
     // move appendix-bottom entries to the bottom
     $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
     $('.appendix-bottom').remove();
+
+    // hoverable references
+    $('span.citation[data-cites]').each(function() {
+      var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+      window.tippy(this, {
+        allowHTML: true,
+        content: refHtml,
+        maxWidth: 500,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start'
+      });
+    });
 
     // clear polling timer
     clearInterval(tid);
@@ -1153,9 +1921,7 @@ function init_downlevel() {
   $('.d-byline a').remove();
 
   // remove toc
-  $('.d-toc-header').remove();
-  $('.d-toc').remove();
-  $('.d-toc-separator').remove();
+  $('.d-contents').remove();
 
   // move appendix elements
   $('h1.appendix, h2.appendix').each(function(i, val) {
@@ -1284,7 +2050,13 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <!--/radix_placeholder_distill-->
-  <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/header-attrs-2.11/header-attrs.js"></script>
+  <script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="../../site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
   <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
   <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
   <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
@@ -1299,7 +2071,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Concatenando data.frames","description":"Como juntar os diversos arquivos .dbc do DATASUS em um data.frame; comparação de tempos de processamento e bibliotecas.","authors":[{"author":"Mario O. de Menezes","authorURL":"https://momenezes.github.io/tutorials","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2020-10-01T00:00:00.000-03:00","citationText":"Menezes, 2020"}
+{"title":"Concatenando data.frames","description":"Como juntar os diversos arquivos .dbc do DATASUS em um data.frame; comparação de tempos de processamento e bibliotecas.","authors":[{"author":"Mario O. de Menezes","authorURL":"https://momenezes.github.io/tutorials","affiliation":"&nbsp;","affiliationURL":"#","orcidID":"0000-0003-0263-3541"}],"publishedDate":"2020-10-01T00:00:00.000-03:00","citationText":"Menezes, 2020"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1316,6 +2088,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <a href="https://www.linkedin.com/in/mariomenezes/">
 <i class="fa fa-linkedin fa-lg" aria-hidden="true"></i>
 </a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
@@ -1328,6 +2101,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="d-title">
 <h1>Concatenando data.frames</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
 <p><p>Como juntar os diversos arquivos .dbc do DATASUS em um data.frame; comparação de tempos de processamento e bibliotecas.</p></p>
 </div>
 
@@ -1340,322 +2115,385 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="d-article">
 <h1 id="introdução">Introdução</h1>
 <p>O DATASUS, braço tecnológico do Ministério da Saúde, disponibiliza uma vasta quantidade de informações sobre diversos aspectos do Serviço Unificado de Saúde (SUS). Muitos destes arquivos são disponibilizados em um formato <em>dbc</em>, que é um “compressed DBF”.</p>
-<p>Estes arquivos são disponibilizados no site de FTP do DATASUS. Para fins deste pequeno experimento, todos os arquivos foram baixados e estão na máquina local.</p>
+<p>Estes arquivos são disponibilizados no site de <a href="ftp://ftp.datasus.gov.br/dissemin/publicos/">FTP</a> do DATASUS. Para fins deste pequeno experimento, todos os arquivos foram baixados e estão na máquina local.</p>
 <p>O objetivo deste pequeno estudo é verificar os tempos gastos em cada etapa: leitura dos arquivos, filtros e seleção de variáveis, e a transformação em um <code>data.frame</code> para posterior manipulação.</p>
 <p><strong>Carregando as bibliotecas</strong></p>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-library(tidyverse)
-library(read.dbc)
-library(data.table)
-library(microbenchmark)</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/danicat/read.dbc'>read.dbc</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://r-datatable.com'>data.table</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/joshuaulrich/microbenchmark/'>microbenchmark</a></span><span class='op'>)</span>
+</code></pre>
+</div>
 </div>
 <h2 id="listando-todos-os-arquivos-das-apacs-no-diretório">Listando todos os arquivos das APACS no diretório</h2>
 <p>Todos os arquivos das APACs foram baixados do site FTP do DATASUS.</p>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-diretorio &lt;- &quot;~/datasets/datasus.gov.br/SIASUS/PA-LaudosDiversos/&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>diretorio</span> <span class='op'>&lt;-</span> <span class='st'>"~/datasets/datasus.gov.br/SIASUS/PA-LaudosDiversos/"</span>
+</code></pre>
+</div>
 </div>
 <h3 id="selecionando-4-arquivos-2-de-cada-estado-de-minas-gerais-e-rio-de-janeiro">Selecionando 4 arquivos, 2 de cada estado, de Minas Gerais e Rio de Janeiro</h3>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-PREF &lt;- &quot;PA&quot;
-# indique o estado ou &#39;&#39; para todos os estados
-UF &lt;- &quot;(MG|RJ)&quot;
-MESES &lt;- &quot;12&quot;
-ANO &lt;- &quot;(18|19)&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>PREF</span> <span class='op'>&lt;-</span> <span class='st'>"PA"</span>
+<span class='co'># indique o estado ou "" para todos os estados</span>
+<span class='va'>UF</span> <span class='op'>&lt;-</span> <span class='st'>"(MG|RJ)"</span> 
+<span class='va'>MESES</span> <span class='op'>&lt;-</span> <span class='st'>"12"</span>
+<span class='va'>ANO</span> <span class='op'>&lt;-</span> <span class='st'>"(18|19)"</span>
+</code></pre>
+</div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-arquivos &lt;- list.files(diretorio, paste0(PREF, UF, ANO, MESES, &quot;.*.dbc&quot;))</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>arquivos</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='va'>diretorio</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>PREF</span>,<span class='va'>UF</span>,<span class='va'>ANO</span>,<span class='va'>MESES</span>,<span class='st'>".*.dbc"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
 </div>
 <h4 id="variáveis-selecionadas">Variáveis selecionadas</h4>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-vars_to_keep = c(&quot;PA_CODUNI&quot;, &quot;PA_UFMUN&quot;, &quot;PA_TPUPS&quot;, &quot;PA_TIPPRE&quot;, &quot;PA_CNPJCPF&quot;, 
-    &quot;PA_MVM&quot;, &quot;PA_CMP&quot;, &quot;PA_PROC_ID&quot;, &quot;PA_CNSMED&quot;, &quot;PA_MOTSAI&quot;, &quot;PA_OBITO&quot;, 
-    &quot;PA_CIDPRI&quot;, &quot;PA_CIDSEC&quot;, &quot;PA_CIDCAS&quot;, &quot;PA_CATEND&quot;, &quot;PA_IDADE&quot;, &quot;PA_SEXO&quot;, 
-    &quot;PA_RACACOR&quot;, &quot;PA_MUNPCN&quot;, &quot;PA_UFDIF&quot;, &quot;PA_MNDIF&quot;, &quot;PA_ETNIA&quot;)</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>vars_to_keep</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"PA_CODUNI"</span>,<span class='st'>"PA_UFMUN"</span>,<span class='st'>"PA_TPUPS"</span>,<span class='st'>"PA_TIPPRE"</span>, <span class='st'>"PA_CNPJCPF"</span>,  <span class='st'>"PA_MVM"</span>,<span class='st'>"PA_CMP"</span>,<span class='st'>"PA_PROC_ID"</span>,<span class='st'>"PA_CNSMED"</span>,<span class='st'>"PA_MOTSAI"</span>,<span class='st'>"PA_OBITO"</span>,<span class='st'>"PA_CIDPRI"</span>, <span class='st'>"PA_CIDSEC"</span>,<span class='st'>"PA_CIDCAS"</span>,<span class='st'>"PA_CATEND"</span>,<span class='st'>"PA_IDADE"</span>,<span class='st'>"PA_SEXO"</span>,<span class='st'>"PA_RACACOR"</span>,<span class='st'>"PA_MUNPCN"</span>, <span class='st'>"PA_UFDIF"</span>,<span class='st'>"PA_MNDIF"</span>,<span class='st'>"PA_ETNIA"</span><span class='op'>)</span>
+</code></pre>
+</div>
 </div>
 <h4 id="tempo-de-leitura-dos-arquivos-em-segundos">Tempo de leitura dos arquivos (em segundos)</h4>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-timeMGRJ4arqs &lt;- system.time({
-    f1 &lt;- read.dbc(paste0(diretorio, arquivos[1]))
-    f2 &lt;- read.dbc(paste0(diretorio, arquivos[2]))
-    f3 &lt;- read.dbc(paste0(diretorio, arquivos[3]))
-    f4 &lt;- read.dbc(paste0(diretorio, arquivos[4]))
-})
-timeMGRJ4arqs</code></pre>
-<pre><code>
-   user  system elapsed 
-240.128  24.900 265.039 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>timeMGRJ4arqs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span><span class='op'>(</span><span class='op'>{</span><span class='va'>f1</span> <span class='op'>&lt;-</span> <span class='fu'>read.dbc</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>diretorio</span>,<span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>; 
+<span class='va'>f2</span> <span class='op'>&lt;-</span> <span class='fu'>read.dbc</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>diretorio</span>,<span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>; 
+<span class='va'>f3</span> <span class='op'>&lt;-</span> <span class='fu'>read.dbc</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>diretorio</span>,<span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>; 
+<span class='va'>f4</span> <span class='op'>&lt;-</span> <span class='fu'>read.dbc</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>diretorio</span>,<span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>;<span class='op'>}</span><span class='op'>)</span>
+<span class='va'>timeMGRJ4arqs</span>
+</code></pre>
+</div>
+<pre><code>   user  system elapsed 
+269.552  33.556 303.112 </code></pre>
 </div>
 <h4 id="montando-uma-lista-de-data.frames">Montando uma lista de data.frames</h4>
 <p>Para estes 4 arquivos iniciais, vou fazer o processo de montar a lista e concatenar usando as duas bibliotecas <code>data.table</code> e <code>dplyr</code> para comparar o tempo nesta etapa.</p>
 <p>Cada <code>data.frame</code> inicial é filtrado e as variáveis são selecionadas; são colocados em uma lista de <code>data.frame</code>s para a concatenação posterior.</p>
 <p>Usando o <strong>data.table</strong></p>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-apacsdt &lt;- list()
-timeMGRJ4arqs_tolistdt &lt;- system.time({
-    # f1
-    f1 &lt;- setDT(f1)
-    f1 &lt;- f1[(PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;, ..vars_to_keep]
-    estado &lt;- substr(arquivos[1], 3, 4)
-    ano &lt;- substr(arquivos[1], 5, 6)
-    mes &lt;- substr(arquivos[1], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f1[, `:=`(ESTADO = estado, ANO = ano, MES = mes)]
-    apacsdt &lt;- append(apacsdt, list(f1))
-    
-    # f2
-    f2 &lt;- setDT(f2)
-    f2 &lt;- f2[(PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;, ..vars_to_keep]
-    estado &lt;- substr(arquivos[2], 3, 4)
-    ano &lt;- substr(arquivos[2], 5, 6)
-    mes &lt;- substr(arquivos[2], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f2[, `:=`(ESTADO = estado, ANO = ano, MES = mes)]
-    apacsdt &lt;- append(apacsdt, list(f2))
-    
-    # f3
-    f3 &lt;- setDT(f3)
-    f3 &lt;- f3[(PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;, ..vars_to_keep]
-    estado &lt;- substr(arquivos[3], 3, 4)
-    ano &lt;- substr(arquivos[3], 5, 6)
-    mes &lt;- substr(arquivos[3], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f3[, `:=`(ESTADO = estado, ANO = ano, MES = mes)]
-    apacsdt &lt;- append(apacsdt, list(f3))
-    
-    # f4
-    f4 &lt;- setDT(f4)
-    f4 &lt;- f4[(PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;, ..vars_to_keep]
-    estado &lt;- substr(arquivos[4], 3, 4)
-    ano &lt;- substr(arquivos[4], 5, 6)
-    mes &lt;- substr(arquivos[4], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f4[, `:=`(ESTADO = estado, ANO = ano, MES = mes)]
-    apacsdt &lt;- append(apacsdt, list(f4))
-    
-})
-timeMGRJ4arqs_tolistdt</code></pre>
-<pre><code>
-   user  system elapsed 
- 25.804   5.760  27.602 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>apacsdt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>timeMGRJ4arqs_tolistdt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='co'># f1</span>
+  <span class='va'>f1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/setDT.html'>setDT</a></span><span class='op'>(</span><span class='va'>f1</span><span class='op'>)</span>
+  <span class='va'>f1</span> <span class='op'>&lt;-</span>
+    <span class='va'>f1</span><span class='op'>[</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span>, <span class='va'>..vars_to_keep</span><span class='op'>]</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f1</span><span class='op'>[</span>, <span class='fu'>`:=`</span><span class='op'>(</span>ESTADO <span class='op'>=</span> <span class='va'>estado</span>,
+            ANO <span class='op'>=</span> <span class='va'>ano</span>,
+            MES <span class='op'>=</span> <span class='va'>mes</span><span class='op'>)</span><span class='op'>]</span>
+  <span class='va'>apacsdt</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacsdt</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f1</span><span class='op'>)</span><span class='op'>)</span>
+  
+  <span class='co'>#f2</span>
+  <span class='va'>f2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/setDT.html'>setDT</a></span><span class='op'>(</span><span class='va'>f2</span><span class='op'>)</span>
+  <span class='va'>f2</span> <span class='op'>&lt;-</span>
+    <span class='va'>f2</span><span class='op'>[</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span>, <span class='va'>..vars_to_keep</span><span class='op'>]</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f2</span><span class='op'>[</span>, <span class='fu'>`:=`</span><span class='op'>(</span>ESTADO <span class='op'>=</span> <span class='va'>estado</span>,
+            ANO <span class='op'>=</span> <span class='va'>ano</span>,
+            MES <span class='op'>=</span> <span class='va'>mes</span><span class='op'>)</span><span class='op'>]</span>
+  <span class='va'>apacsdt</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacsdt</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f2</span><span class='op'>)</span><span class='op'>)</span>
+  
+  <span class='co'># f3</span>
+  <span class='va'>f3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/setDT.html'>setDT</a></span><span class='op'>(</span><span class='va'>f3</span><span class='op'>)</span>
+  <span class='va'>f3</span> <span class='op'>&lt;-</span>
+    <span class='va'>f3</span><span class='op'>[</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span>, <span class='va'>..vars_to_keep</span><span class='op'>]</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f3</span><span class='op'>[</span>, <span class='fu'>`:=`</span><span class='op'>(</span>ESTADO <span class='op'>=</span> <span class='va'>estado</span>,
+            ANO <span class='op'>=</span> <span class='va'>ano</span>,
+            MES <span class='op'>=</span> <span class='va'>mes</span><span class='op'>)</span><span class='op'>]</span>
+  <span class='va'>apacsdt</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacsdt</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f3</span><span class='op'>)</span><span class='op'>)</span>
+  
+  <span class='co'># f4</span>
+  <span class='va'>f4</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/setDT.html'>setDT</a></span><span class='op'>(</span><span class='va'>f4</span><span class='op'>)</span>
+  <span class='va'>f4</span> <span class='op'>&lt;-</span>
+    <span class='va'>f4</span><span class='op'>[</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span>, <span class='va'>..vars_to_keep</span><span class='op'>]</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f4</span><span class='op'>[</span>, <span class='fu'>`:=`</span><span class='op'>(</span>ESTADO <span class='op'>=</span> <span class='va'>estado</span>,
+            ANO <span class='op'>=</span> <span class='va'>ano</span>,
+            MES <span class='op'>=</span> <span class='va'>mes</span><span class='op'>)</span><span class='op'>]</span>
+  <span class='va'>apacsdt</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacsdt</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f4</span><span class='op'>)</span><span class='op'>)</span>
+  
+<span class='op'>}</span><span class='op'>)</span>
+<span class='va'>timeMGRJ4arqs_tolistdt</span>
+</code></pre>
+</div>
+<pre><code>   user  system elapsed 
+  4.820   0.040   0.807 </code></pre>
 </div>
 <p>Usando o <strong>dplyr</strong></p>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-apacs &lt;- list()
-timeMGRJ4arqs_tolistdplyr &lt;- system.time({
-    # f1
-    f1 &lt;- f1 %&gt;% filter((PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;) %&gt;% select(vars_to_keep)
-    estado &lt;- substr(arquivos[1], 3, 4)
-    ano &lt;- substr(arquivos[1], 5, 6)
-    mes &lt;- substr(arquivos[1], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f1 &lt;- f1 %&gt;% mutate(ESTADO = estado, ANO = ano, MES = mes)
-    apacs &lt;- append(apacs, list(f1))
-    
-    # f2
-    f2 &lt;- f2 %&gt;% filter((PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;) %&gt;% select(vars_to_keep)
-    estado &lt;- substr(arquivos[2], 3, 4)
-    ano &lt;- substr(arquivos[2], 5, 6)
-    mes &lt;- substr(arquivos[2], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f2 &lt;- f2 %&gt;% mutate(ESTADO = estado, ANO = ano, MES = mes)
-    apacs &lt;- append(apacs, list(f2))
-    
-    # f3
-    f3 &lt;- f3 %&gt;% filter((PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;) %&gt;% select(vars_to_keep)
-    estado &lt;- substr(arquivos[3], 3, 4)
-    ano &lt;- substr(arquivos[3], 5, 6)
-    mes &lt;- substr(arquivos[3], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f3 &lt;- f3 %&gt;% mutate(ESTADO = estado, ANO = ano, MES = mes)
-    apacs &lt;- append(apacs, list(f3))
-    
-    # f4
-    f4 &lt;- f4 %&gt;% filter((PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;) %&gt;% select(vars_to_keep)
-    estado &lt;- substr(arquivos[4], 3, 4)
-    ano &lt;- substr(arquivos[4], 5, 6)
-    mes &lt;- substr(arquivos[4], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f4 &lt;- f4 %&gt;% mutate(ESTADO = estado, ANO = ano, MES = mes)
-    apacs &lt;- append(apacs, list(f4))
-    
-})
-timeMGRJ4arqs_tolistdplyr</code></pre>
-<pre><code>
-   user  system elapsed 
-  0.120   0.000   0.119 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>apacs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>timeMGRJ4arqs_tolistdplyr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='co'># f1</span>
+  <span class='va'>f1</span> <span class='op'>&lt;-</span> <span class='va'>f1</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>select</span><span class='op'>(</span><span class='va'>vars_to_keep</span><span class='op'>)</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f1</span> <span class='op'>&lt;-</span> <span class='va'>f1</span> <span class='op'>%&gt;%</span> <span class='fu'>mutate</span><span class='op'>(</span>ESTADO<span class='op'>=</span><span class='va'>estado</span>,ANO<span class='op'>=</span><span class='va'>ano</span>,MES<span class='op'>=</span><span class='va'>mes</span><span class='op'>)</span>
+  <span class='va'>apacs</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacs</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f1</span><span class='op'>)</span><span class='op'>)</span>
+  
+  <span class='co'>#f2</span>
+  <span class='va'>f2</span> <span class='op'>&lt;-</span> <span class='va'>f2</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>select</span><span class='op'>(</span><span class='va'>vars_to_keep</span><span class='op'>)</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f2</span> <span class='op'>&lt;-</span> <span class='va'>f2</span>  <span class='op'>%&gt;%</span> <span class='fu'>mutate</span><span class='op'>(</span>ESTADO<span class='op'>=</span><span class='va'>estado</span>,ANO<span class='op'>=</span><span class='va'>ano</span>,MES<span class='op'>=</span><span class='va'>mes</span><span class='op'>)</span>
+  <span class='va'>apacs</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacs</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f2</span><span class='op'>)</span><span class='op'>)</span>
+  
+  <span class='co'># f3</span>
+  <span class='va'>f3</span> <span class='op'>&lt;-</span> <span class='va'>f3</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>select</span><span class='op'>(</span><span class='va'>vars_to_keep</span><span class='op'>)</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f3</span> <span class='op'>&lt;-</span> <span class='va'>f3</span> <span class='op'>%&gt;%</span> <span class='fu'>mutate</span><span class='op'>(</span>ESTADO<span class='op'>=</span><span class='va'>estado</span>,ANO<span class='op'>=</span><span class='va'>ano</span>,MES<span class='op'>=</span><span class='va'>mes</span><span class='op'>)</span>
+  <span class='va'>apacs</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacs</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f3</span><span class='op'>)</span><span class='op'>)</span>
+  
+  <span class='co'># f4</span>
+  <span class='va'>f4</span> <span class='op'>&lt;-</span> <span class='va'>f4</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>select</span><span class='op'>(</span><span class='va'>vars_to_keep</span><span class='op'>)</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f4</span> <span class='op'>&lt;-</span> <span class='va'>f4</span> <span class='op'>%&gt;%</span> <span class='fu'>mutate</span><span class='op'>(</span>ESTADO<span class='op'>=</span><span class='va'>estado</span>,ANO<span class='op'>=</span><span class='va'>ano</span>,MES<span class='op'>=</span><span class='va'>mes</span><span class='op'>)</span>
+  <span class='va'>apacs</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacs</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f4</span><span class='op'>)</span><span class='op'>)</span>
+  
+<span class='op'>}</span><span class='op'>)</span>
+<span class='va'>timeMGRJ4arqs_tolistdplyr</span>
+</code></pre>
+</div>
+<pre><code>   user  system elapsed 
+  0.096   0.000   0.095 </code></pre>
 </div>
 <h4 id="concatenando-os-data.frames">Concatenando os data.frames</h4>
 <p>Com a função <code>rbindlist</code> do pacote <strong>data.table</strong></p>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-timeMGRJ4arqs_todf &lt;- system.time({
-    X &lt;- data.table::rbindlist(apacsdt)
-    assign(&quot;APACSPA_MGRJdt&quot;, X)
-    rm(X)
-})
-timeMGRJ4arqs_todf</code></pre>
-<pre><code>
-   user  system elapsed 
-  0.016   0.000   0.017 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>timeMGRJ4arqs_todf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span><span class='op'>(</span><span class='op'>{</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span>
+  <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>rbindlist</a></span><span class='op'>(</span><span class='va'>apacsdt</span><span class='op'>)</span> 
+<span class='fu'><a href='https://rdrr.io/r/base/assign.html'>assign</a></span><span class='op'>(</span><span class='st'>"APACSPA_MGRJdt"</span>, <span class='va'>X</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+<span class='va'>timeMGRJ4arqs_todf</span>
+</code></pre>
+</div>
+<pre><code>   user  system elapsed 
+  0.028   0.000   0.026 </code></pre>
 </div>
 <p>Com a função <code>bind_rows</code> do pacote <strong>dplyr</strong></p>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-timeMGRJ4arqs_tolistdplyr &lt;- system.time({
-    X &lt;- bind_rows(apacs)
-    assign(&quot;APACSPA_MGRJdplyr&quot;, X)
-    rm(X)
-})
-timeMGRJ4arqs_tolistdplyr</code></pre>
-<pre><code>
-   user  system elapsed 
-  0.076   0.000   0.076 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>timeMGRJ4arqs_tolistdplyr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='va'>X</span> <span class='op'>&lt;-</span>
+   <span class='fu'>bind_rows</span><span class='op'>(</span><span class='va'>apacs</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/assign.html'>assign</a></span><span class='op'>(</span><span class='st'>"APACSPA_MGRJdplyr"</span>, <span class='va'>X</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+<span class='va'>timeMGRJ4arqs_tolistdplyr</span>
+</code></pre>
+</div>
+<pre><code>   user  system elapsed 
+  0.076   0.000   0.074 </code></pre>
 </div>
 <h3 id="selecionando-4-arquivos-de-são-paulo">Selecionando 4 arquivos de São Paulo</h3>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-PREF &lt;- &quot;PA&quot;
-# indique o estado ou &#39;&#39; para todos os estados
-UF &lt;- &quot;SP&quot;
-MESES &lt;- &quot;(01|02)&quot;
-ANO &lt;- &quot;19&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>PREF</span> <span class='op'>&lt;-</span> <span class='st'>"PA"</span>
+<span class='co'># indique o estado ou "" para todos os estados</span>
+<span class='va'>UF</span> <span class='op'>&lt;-</span> <span class='st'>"SP"</span> 
+<span class='va'>MESES</span> <span class='op'>&lt;-</span> <span class='st'>"(01|02)"</span>
+<span class='va'>ANO</span> <span class='op'>&lt;-</span> <span class='st'>"19"</span>
+</code></pre>
+</div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-arquivos &lt;- list.files(diretorio, paste0(PREF, UF, ANO, MESES, &quot;.*.dbc&quot;))</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>arquivos</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.files.html'>list.files</a></span><span class='op'>(</span><span class='va'>diretorio</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>PREF</span>,<span class='va'>UF</span>,<span class='va'>ANO</span>,<span class='va'>MESES</span>,<span class='st'>".*.dbc"</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
 </div>
 <h4 id="tempo-de-leitura-dos-arquivos-em-segundos-1">Tempo de leitura dos arquivos (em segundos)</h4>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-timeSP4arqs &lt;- system.time({
-    f1 &lt;- read.dbc(paste0(diretorio, arquivos[1]))
-    f2 &lt;- read.dbc(paste0(diretorio, arquivos[2]))
-    f3 &lt;- read.dbc(paste0(diretorio, arquivos[3]))
-    f4 &lt;- read.dbc(paste0(diretorio, arquivos[4]))
-})
-timeSP4arqs</code></pre>
-<pre><code>
-   user  system elapsed 
-285.212  24.076 309.305 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>timeSP4arqs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span><span class='op'>(</span><span class='op'>{</span><span class='va'>f1</span> <span class='op'>&lt;-</span> <span class='fu'>read.dbc</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>diretorio</span>,<span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>; 
+<span class='va'>f2</span> <span class='op'>&lt;-</span> <span class='fu'>read.dbc</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>diretorio</span>,<span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>; 
+<span class='va'>f3</span> <span class='op'>&lt;-</span> <span class='fu'>read.dbc</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>diretorio</span>,<span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>; 
+<span class='va'>f4</span> <span class='op'>&lt;-</span> <span class='fu'>read.dbc</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>diretorio</span>,<span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>;<span class='op'>}</span><span class='op'>)</span>
+<span class='va'>timeSP4arqs</span>
+</code></pre>
+</div>
+<pre><code>   user  system elapsed 
+319.472  29.012 348.506 </code></pre>
 </div>
 <h4 id="montando-a-lista-de-data.frames">Montando a lista de data.frames</h4>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-apacs &lt;- list()
-timeSP4arqs_tolist &lt;- system.time({
-    # f1
-    f1 &lt;- setDT(f1)
-    f1 &lt;- f1[(PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;, ..vars_to_keep]
-    estado &lt;- substr(arquivos[1], 3, 4)
-    ano &lt;- substr(arquivos[1], 5, 6)
-    mes &lt;- substr(arquivos[1], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f1[, `:=`(ESTADO = estado, ANO = ano, MES = mes)]
-    apacs &lt;- append(apacs, list(f1))
-    
-    # f2
-    f2 &lt;- setDT(f2)
-    f2 &lt;- f2[(PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;, ..vars_to_keep]
-    estado &lt;- substr(arquivos[2], 3, 4)
-    ano &lt;- substr(arquivos[2], 5, 6)
-    mes &lt;- substr(arquivos[2], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f2[, `:=`(ESTADO = estado, ANO = ano, MES = mes)]
-    apacs &lt;- append(apacs, list(f2))
-    
-    # f3
-    f3 &lt;- setDT(f3)
-    f3 &lt;- f3[(PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;, ..vars_to_keep]
-    estado &lt;- substr(arquivos[3], 3, 4)
-    ano &lt;- substr(arquivos[3], 5, 6)
-    mes &lt;- substr(arquivos[3], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f3[, `:=`(ESTADO = estado, ANO = ano, MES = mes)]
-    apacs &lt;- append(apacs, list(f3))
-    
-    # f4
-    f4 &lt;- setDT(f4)
-    f4 &lt;- f4[(PA_PROC_ID == &quot;0204030030&quot; | PA_PROC_ID == &quot;0204030188&quot;) &amp; 
-        PA_SEXO == &quot;F&quot;, ..vars_to_keep]
-    estado &lt;- substr(arquivos[4], 3, 4)
-    ano &lt;- substr(arquivos[4], 5, 6)
-    mes &lt;- substr(arquivos[4], 7, 8)
-    ano &lt;- as.numeric(paste0(&quot;20&quot;, ano))
-    f4[, `:=`(ESTADO = estado, ANO = ano, MES = mes)]
-    apacs &lt;- append(apacs, list(f4))
-    
-})
-timeSP4arqs_tolist</code></pre>
-<pre><code>
-   user  system elapsed 
-  7.936   1.784   5.476 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>apacs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>timeSP4arqs_tolist</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='co'># f1</span>
+  <span class='va'>f1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/setDT.html'>setDT</a></span><span class='op'>(</span><span class='va'>f1</span><span class='op'>)</span>
+  <span class='va'>f1</span> <span class='op'>&lt;-</span>
+    <span class='va'>f1</span><span class='op'>[</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span>, <span class='va'>..vars_to_keep</span><span class='op'>]</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f1</span><span class='op'>[</span>, <span class='fu'>`:=`</span><span class='op'>(</span>ESTADO <span class='op'>=</span> <span class='va'>estado</span>,
+            ANO <span class='op'>=</span> <span class='va'>ano</span>,
+            MES <span class='op'>=</span> <span class='va'>mes</span><span class='op'>)</span><span class='op'>]</span>
+  <span class='va'>apacs</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacs</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f1</span><span class='op'>)</span><span class='op'>)</span>
+  
+  <span class='co'># f2</span>
+  <span class='va'>f2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/setDT.html'>setDT</a></span><span class='op'>(</span><span class='va'>f2</span><span class='op'>)</span>
+  <span class='va'>f2</span> <span class='op'>&lt;-</span>
+    <span class='va'>f2</span><span class='op'>[</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span>, <span class='va'>..vars_to_keep</span><span class='op'>]</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>2</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f2</span><span class='op'>[</span>, <span class='fu'>`:=`</span><span class='op'>(</span>ESTADO <span class='op'>=</span> <span class='va'>estado</span>,
+            ANO <span class='op'>=</span> <span class='va'>ano</span>,
+            MES <span class='op'>=</span> <span class='va'>mes</span><span class='op'>)</span><span class='op'>]</span>
+  <span class='va'>apacs</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacs</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f2</span><span class='op'>)</span><span class='op'>)</span>
+  
+  <span class='co'># f3</span>
+  <span class='va'>f3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/setDT.html'>setDT</a></span><span class='op'>(</span><span class='va'>f3</span><span class='op'>)</span>
+  <span class='va'>f3</span> <span class='op'>&lt;-</span>
+    <span class='va'>f3</span><span class='op'>[</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span>, <span class='va'>..vars_to_keep</span><span class='op'>]</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f3</span><span class='op'>[</span>, <span class='fu'>`:=`</span><span class='op'>(</span>ESTADO <span class='op'>=</span> <span class='va'>estado</span>,
+            ANO <span class='op'>=</span> <span class='va'>ano</span>,
+            MES <span class='op'>=</span> <span class='va'>mes</span><span class='op'>)</span><span class='op'>]</span>
+  <span class='va'>apacs</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacs</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f3</span><span class='op'>)</span><span class='op'>)</span>
+  
+  <span class='co'># f4</span>
+  <span class='va'>f4</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/setDT.html'>setDT</a></span><span class='op'>(</span><span class='va'>f4</span><span class='op'>)</span>
+  <span class='va'>f4</span> <span class='op'>&lt;-</span>
+    <span class='va'>f4</span><span class='op'>[</span><span class='op'>(</span><span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030030"</span> <span class='op'>|</span>
+          <span class='va'>PA_PROC_ID</span> <span class='op'>==</span> <span class='st'>"0204030188"</span><span class='op'>)</span> <span class='op'>&amp;</span>
+         <span class='va'>PA_SEXO</span> <span class='op'>==</span> <span class='st'>"F"</span>, <span class='va'>..vars_to_keep</span><span class='op'>]</span>
+  <span class='va'>estado</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>3</span>, <span class='fl'>4</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>5</span>, <span class='fl'>6</span><span class='op'>)</span>
+  <span class='va'>mes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substr.html'>substr</a></span><span class='op'>(</span><span class='va'>arquivos</span><span class='op'>[</span><span class='fl'>4</span><span class='op'>]</span>, <span class='fl'>7</span>, <span class='fl'>8</span><span class='op'>)</span>
+  <span class='va'>ano</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"20"</span>, <span class='va'>ano</span><span class='op'>)</span><span class='op'>)</span>
+  <span class='va'>f4</span><span class='op'>[</span>, <span class='fu'>`:=`</span><span class='op'>(</span>ESTADO <span class='op'>=</span> <span class='va'>estado</span>,
+            ANO <span class='op'>=</span> <span class='va'>ano</span>,
+            MES <span class='op'>=</span> <span class='va'>mes</span><span class='op'>)</span><span class='op'>]</span>
+  <span class='va'>apacs</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/append.html'>append</a></span><span class='op'>(</span><span class='va'>apacs</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>f4</span><span class='op'>)</span><span class='op'>)</span>
+  
+<span class='op'>}</span><span class='op'>)</span>
+<span class='va'>timeSP4arqs_tolist</span>
+</code></pre>
+</div>
+<pre><code>   user  system elapsed 
+  3.680   0.000   0.598 </code></pre>
 </div>
 <h4 id="concatenando-os-data.frames-1">Concatenando os data.frames</h4>
 <p>Com a função <code>rbindlist</code> do pacote <strong>data.table</strong></p>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-timeSP4arqs_todf &lt;- system.time({
-    X &lt;- data.table::rbindlist(apacs)
-    assign(&quot;APACSPA_SPdt&quot;, X)
-    rm(X)
-})
-timeSP4arqs_todf</code></pre>
-<pre><code>
-   user  system elapsed 
-  0.032   0.000   0.032 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>timeSP4arqs_todf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span><span class='op'>(</span><span class='op'>{</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span>
+  <span class='fu'>data.table</span><span class='fu'>::</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/rbindlist.html'>rbindlist</a></span><span class='op'>(</span><span class='va'>apacs</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/assign.html'>assign</a></span><span class='op'>(</span><span class='st'>"APACSPA_SPdt"</span>, <span class='va'>X</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+<span class='va'>timeSP4arqs_todf</span>
+</code></pre>
+</div>
+<pre><code>   user  system elapsed 
+  0.040   0.000   0.038 </code></pre>
 </div>
 <p>Com a função <code>bind_rows</code> do pacote <strong>dplyr</strong></p>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-timeSP4arqs_tolistdplyr &lt;- system.time({
-    X &lt;- bind_rows(apacs)
-    assign(&quot;APACSPA_SPdplyr&quot;, X)
-    rm(X)
-})
-timeSP4arqs_tolistdplyr</code></pre>
-<pre><code>
-   user  system elapsed 
-  0.092   0.000   0.093 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>timeSP4arqs_tolistdplyr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span><span class='op'>(</span><span class='op'>{</span>
+  <span class='va'>X</span> <span class='op'>&lt;-</span>
+   <span class='fu'>bind_rows</span><span class='op'>(</span><span class='va'>apacs</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/assign.html'>assign</a></span><span class='op'>(</span><span class='st'>"APACSPA_SPdplyr"</span>, <span class='va'>X</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span>
+<span class='op'>}</span><span class='op'>)</span>
+<span class='va'>timeSP4arqs_tolistdplyr</span>
+</code></pre>
+</div>
+<pre><code>   user  system elapsed 
+  0.096   0.000   0.096 </code></pre>
 </div>
 <h2 id="gravando-um-csv">Gravando um CSV</h2>
 <h3 id="usando-data.table---função-fwrite">Usando data.table - função fwrite</h3>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-caminho &lt;- getwd()
-nomearquivocsv &lt;- &quot;APACSSPdt.CSV&quot;
-system.time(fwrite(APACSPA_SPdt, paste(caminho, nomearquivocsv, sep = &quot;/&quot;)))</code></pre>
-<pre><code>
-   user  system elapsed 
-  0.856   0.052   0.261 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>caminho</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>nomearquivocsv</span> <span class='op'>&lt;-</span> <span class='st'>"APACSSPdt.CSV"</span>
+<span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span><span class='op'>(</span><span class='fu'><a href='https://Rdatatable.gitlab.io/data.table/reference/fwrite.html'>fwrite</a></span><span class='op'>(</span><span class='va'>APACSPA_SPdt</span>,<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>caminho</span>,<span class='va'>nomearquivocsv</span>,sep<span class='op'>=</span><span class='st'>"/"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>   user  system elapsed 
+  0.880   0.044   0.541 </code></pre>
 </div>
 <h3 id="usando-readr---função-write_csv">Usando readr - função write_csv</h3>
 <div class="layout-chunk" data-layout="l-body">
-<pre class="r"><code>
-nomearquivocsv &lt;- &quot;APACSSPdplyr.CSV&quot;
-system.time(write_csv(APACSPA_SPdt, paste(caminho, nomearquivocsv, sep = &quot;/&quot;)))</code></pre>
-<pre><code>
-   user  system elapsed 
-  2.196   0.068   2.374 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nomearquivocsv</span> <span class='op'>&lt;-</span> <span class='st'>"APACSSPdplyr.CSV"</span>
+<span class='fu'><a href='https://rdrr.io/r/base/system.time.html'>system.time</a></span><span class='op'>(</span><span class='fu'>write_csv</span><span class='op'>(</span><span class='va'>APACSPA_SPdt</span>,<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>caminho</span>,<span class='va'>nomearquivocsv</span>,sep<span class='op'>=</span><span class='st'>"/"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
 </div>
+<pre><code>   user  system elapsed 
+  0.636   0.752   1.301 </code></pre>
+</div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <div class="article-footer">
   <p class="social_footer">
@@ -1676,7 +2514,7 @@ system.time(write_csv(APACSPA_SPdt, paste(caminho, nomearquivocsv, sep = &quot;/
   </p>
   <script id="dsq-count-scr" src="https://momenezes-github-io-tutorials.disqus.com/count.js" async></script>
   <div id="disqus_thread" class="hidden"></div>
-  <script>
+  <script type="text/javascript" cookie-consent="functionality">
 var disqus_config = function () {
   this.page.url = 'https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes/';
   this.page.identifier = 'posts/2020-10-01-concatenando-dataframes/';
@@ -1700,6 +2538,8 @@ var disqus_config = function () {
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
+  <h3 id="reuse">Reuse</h3>
+  <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
   <h3 id="citation">Citation</h3>
   <p>For attribution, please cite this work as</p>
   <pre class="citation-appendix short">Menezes (2020, Oct. 1). Alguns Tutoriais: Concatenando data.frames. Retrieved from https://momenezes.github.io/tutorials/posts/2020-10-01-concatenando-dataframes/</pre>
