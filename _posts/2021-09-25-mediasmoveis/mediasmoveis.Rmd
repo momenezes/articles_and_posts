@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, tidy = TRUE
 
 # Médias Móveis
 
-Médias móveis são um recurso muito utilizado em dados do tipo *séries temporais*; sua aplicação é para _suavizar_ uma série, permitindo que sejam mais facilmente observados comportamentos e tendências nesses dados.
+Média móvel é um recurso muito utilizado em dados do tipo *séries temporais*; sua aplicação é para _suavizar_ uma série, permitindo que sejam mais facilmente observados comportamentos e tendências nesses dados.
 
 A ideia é que cada ponto original será subsituído pela média dos pontos vizinhos, definidos através de uma _janela_ de largura $w$, que vai se movimentando pelos pontos. 
 
