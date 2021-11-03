@@ -1,0 +1,137 @@
+---
+title: "Teste de Hipóteses"
+description: |
+  Conceitos, cálculos e visualizações.
+author:
+  - name: Mario O. de Menezes
+    url: https://momenezes.github.io/tutorials
+    orcid_id: 0000-0003-0263-3541
+date: 10-30-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    highlight: tango
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+library(tidyverse)
+library(plotly)
+```
+
+
+# Teste de Hipótese
+
+## População e Amostra
+
+Muitas vezes precisamos verificar medidas relacionadas a uma *população* -- todos os indivíduos de interesse do estudo; o modo inicial para se fazer isso seria obter os dados de toda a população. Mas nem sempre é possível realizar essa coleta de dados de toda a população, e isso por diversos motivos, dentre eles o custo e o tempo necessário.
+
+Assim, é comum utilizarmos um subconjunto da população, chamado de *amostra*. Essa *amostra* deve possuir então características que nos possibilitem *inferir* os parâmetros da população. Há diversas maneiras de se selecionar os elementos da *amostra*: aleatoriamente, por grupos representativos, por representatividade na população, etc. Esses conceitos podem ser explorados em um bom livro de Estatística e Probabilidade.
+
+A maneira mais utilizada de se selecionar os indivíduos da amostra é a aleatória, de forma independente, cuidando para que cada elemento tenha a mesma probabilidade de ser selecionado. Uma outra característica da amostra é o seu tamanho, que será o conceito que exploraremos nesse estudo juntamente com uma característica da população, a saber, o desvio padrão.
+
+Juntando estes conceitos, chegamos à definição (informal) de Teste de Hipótese:
+
+> Um teste de hipótese em Estatística é uma afirmação sobre um parâmetro de uma população a partir dos dados de uma amostra.
+
+## Distribuição de Probabilidade
+
+Suponha que você esteja estudando o peso (massa corporal) de uma população de animais que vive em determinada região. Em um trabalho muito extenso anterior, todos os animais daquela população foram pesados, de modo que são conhecidos para a população o peso médio (**xbar**) e também a dispersão destes valores, isto é, o desvio padrão (**desvio**).
+
+Ao *plotar* os valores do peso de cada animal e também através de algumas verificações matemáticas, conclui-se que a variável aleatória peso segue uma distribuição normal. *Variável aleatória* porque cada animal tem um peso diferente, que não tem dependência com o animal que foi pesado antes e nem vai influenciar o peso do próximo animal. 
+
+No Teste de Hipótese, um conceito importante é *a distribuição de probabilidades* da variável aleatória que estamos estudando. É preciso conhecer essa distribuição de probabilidades; caso não seja possível esse conhecimento, será necessário fazer assunções sobre ela para realizar o teste.
+
+A distribuição normal é aquela com forma de *sino*; se adotarmos no nosso exemplo que a média de peso da população seja 3.4kg, com um desvio padrão 0.7kg, e a população que foi pesada seja de 800 animais, podemos ter uma distribuição de probabilidades dos pesos como a mostrada na figura abaixo. Como nossa população é finita, o formato da curva não é perfeitamente um *sino*, mas se aproxima.
+
+```{r}
+set.seed(1234)
+y <- rnorm(800, mean = 3.4, sd = 0.7)
+x <- seq(1:800)
+df <- tibble(x = x, `Peso(kg)` = y)
+g <- ggplot(data = df) + 
+  geom_density(aes(x = `Peso(kg)`)) +
+  labs(x = "Peso(kg)", y = "Densidade de Probabilidade") + 
+  theme_light() 
+ggplotly(g)
+```
+
+
+
+O eixo *y* representa a *densidade de probabilidade de ocorrência de x*. Ao mover o mouse sobre os pontos, os valores de *x* e *y* são mostrados; você poderá verificar que quando se afasta da média *x = 3.4*, o valor de *y* vai ficando cada vez menor, isto é, a probabilidade de ocorrência deste valor de *x* vai ficando cada vez menor.
+
+## Amostras
+
+Suponha que nosso biólogo colete uma amostra de 30 animais e faça a pesagem. Do ponto de vista da Teoria da Probabilidade, temos a seguinte definição:
+
+> Se a população da qual se extraem as amsotras tem distribuição normal, então a distribuição de probabilidade da média amostral também seguirá uma normal.
+
+Podemos simular um experimento que realize um grande número de amostragens, calcule a média de cada amostra e depois observamos a distribuição destas médias amostrais. 
+
+Começamos com a ilustração de uma amostra de $n = 30$ dos animais em estudo, conforme mostrado na figura abaixo.
+
+```{r}
+set.seed(1234)
+y2 <- y + runif(800,0.2, 0.8)
+amostra <- slice_sample(df, n = 30, replace = TRUE)
+amostra$P0 <- 0
+pesomedioamostra = mean(amostra$`Peso(kg)`)
+g + geom_point(aes(x = `Peso(kg)`, y = P0), data = amostra, color = "blue") +
+  geom_segment(aes(x = pesomedioamostra, y = 0, xend=pesomedioamostra, yend = 0.05), color = "red") +
+  annotate("text", x = 1.05*pesomedioamostra, y = 0.07, label = paste("Média Amostra: ",  round(pesomedioamostra,3)))
+```
+
+
+
+```{r eval = FALSE}
+x <- seq(-4,4, by = 0.01)
+y <- dnorm(x)
+df <- tibble(x = x, y = y)
+g <- ggplot(data = df) + 
+  geom_point(aes(x,y), size = 0.5, color = "black") +
+  theme_light()
+ggplotly(g)
+```
+
+<!-- 
+
+É lógico que os animais do nosso exemplo não têm peso cuja média seja zero! E nem desvio padrão igual a 1. Então, porque a curva mostrada tem média = 0 e desvio padrão = 1?
+
+É que estamos mostrando a distribuição normal padronizada, cuja área é igual a 1. Ou seja, a soma de todas as probabilidades deve ser 1.
+
+Para transformar os valores de peso dos animais com esta restrição, usamos uma 
+Essa técnica é chamada de normalização (ou padronização); consiste em transformar o valor original da variável, centrando-o em torno de uma das medidas de posição central (a média é uma delas) e mudando sua escala para uma das medidas de dispersão da distribuição (o desvio padrão é uma delas). 
+
+Assim, os novos valores serão calculados como:
+$$z = \frac{x_i - \bar{x}}{\sqrt(n)\times \sigma}$$
+
+-->
+
+
+
+
+## Populações ou Efeitos Modificadores
+
+Continuando nosso exemplo da população de animais que estamos estudando, suponha agora que houve algum evento, ou fator, que tenha alterado o suprimento de alimento para os animais. Nessa situação, depois de algum tempo, pode ter havido uma diminuição do peso (massa corporal) destes animais.
+
+Se fizéssemos um senso novamente, pesando todos os animas daquela população, poderíamos encontrar uma *nova distribuição de pesos*, gerando uma segunda curva, como mostrado na figura abaixo.
+
+
+```{r}
+x <- seq(-4,4, by = 0.01)
+y <- dnorm(x)
+df1 <- tibble(x = x, y = y, epoca = "Primeira")
+y1 <- y + runif(length(x),)
+g <- ggplot(data = df) + 
+  geom_point(aes(x,y), size = 0.5, color = "black") +
+  theme_light()
+ggplotly(g)
+```
+
+Para verificar essa possibilidade, nosso biólogo coleta uma amostra destes animais e faz a pesagem.
+
+

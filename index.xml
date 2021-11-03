@@ -8,7 +8,15 @@
 Outras tecnologias, ferramentas e linguagens também.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sat, 25 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 30 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Teste de Hipóteses</title>
+      <dc:creator>Mario O. de Menezes</dc:creator>
+      <link>https://momenezes.github.io/tutorials/posts/2021-10-30-teste-de-hipteses</link>
+      <description>Conceitos, cálculos e visualizações.</description>
+      <guid>https://momenezes.github.io/tutorials/posts/2021-10-30-teste-de-hipteses</guid>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Médias Móveis</title>
       <dc:creator>Mario O. de Menezes</dc:creator>
