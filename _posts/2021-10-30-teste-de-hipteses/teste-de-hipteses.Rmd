@@ -11,6 +11,7 @@ output:
   distill::distill_article:
     self_contained: false
     highlight: tango
+draft: true
 ---
 
 
@@ -21,6 +22,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```{r}
 library(tidyverse)
 library(plotly)
+library(ggpubr)
 ```
 
 
@@ -28,11 +30,13 @@ library(plotly)
 
 ## População e Amostra
 
-Muitas vezes precisamos verificar medidas relacionadas a uma *população* -- todos os indivíduos de interesse do estudo; o modo inicial para se fazer isso seria obter os dados de toda a população. Mas nem sempre é possível realizar essa coleta de dados de toda a população, e isso por diversos motivos, dentre eles o custo e o tempo necessário.
+Muitas vezes precisamos obter medidas de a uma *população* (todos os indivíduos de interesse do estudo); o modo inicial para se fazer isso seria obter os dados de toda a população. Mas nem sempre é possível realizar essa coleta de dados de toda a população, e isso por diversos motivos, dentre eles o custo e o tempo necessário.
 
 Assim, é comum utilizarmos um subconjunto da população, chamado de *amostra*. Essa *amostra* deve possuir então características que nos possibilitem *inferir* os parâmetros da população. Há diversas maneiras de se selecionar os elementos da *amostra*: aleatoriamente, por grupos representativos, por representatividade na população, etc. Esses conceitos podem ser explorados em um bom livro de Estatística e Probabilidade.
 
-A maneira mais utilizada de se selecionar os indivíduos da amostra é a aleatória, de forma independente, cuidando para que cada elemento tenha a mesma probabilidade de ser selecionado. Uma outra característica da amostra é o seu tamanho, que será o conceito que exploraremos nesse estudo juntamente com uma característica da população, a saber, o desvio padrão.
+A maneira mais utilizada de se selecionar os indivíduos da amostra é a aleatória, de forma independente, cuidando para que cada elemento tenha a mesma probabilidade de ser selecionado, isto é, identicamente distribuído. Uma outra característica da amostra é o seu tamanho, que será o conceito que exploraremos nesse estudo juntamente com uma característica da população, a saber, o desvio padrão.
+
+Então, com a amostra em mãos, efetuamos os cálculos desejados e fazemos a *inferência*, isto é, uma afirmação sobre um *parâmetro* da população. Nossa afirmação pode estar correta (ser verdadeira) ou errada (ser falsa). É comum querermos atribuir um grau de confiância a esta afirmação; algo como "... é possível afirmar, com 95% de confiança, que ..."
 
 Juntando estes conceitos, chegamos à definição (informal) de Teste de Hipótese:
 
@@ -46,29 +50,45 @@ Ao *plotar* os valores do peso de cada animal e também através de algumas veri
 
 No Teste de Hipótese, um conceito importante é *a distribuição de probabilidades* da variável aleatória que estamos estudando. É preciso conhecer essa distribuição de probabilidades; caso não seja possível esse conhecimento, será necessário fazer assunções sobre ela para realizar o teste.
 
-A distribuição normal é aquela com forma de *sino*; se adotarmos no nosso exemplo que a média de peso da população seja 3.4kg, com um desvio padrão 0.7kg, e a população que foi pesada seja de 800 animais, podemos ter uma distribuição de probabilidades dos pesos como a mostrada na figura abaixo. Como nossa população é finita, o formato da curva não é perfeitamente um *sino*, mas se aproxima.
+A distribuição normal é aquela com forma de *sino*; se adotarmos no nosso exemplo que a média de peso da população seja 3.4kg, com um desvio padrão 0.7kg, e a população que foi pesada seja de 800 animais, podemos ter uma *ideia* da distribuição real de probabilidades dos pesos como a mostrada na figura abaixo. Como nossa população é finita, a curva mostrada é uma estimativa da curva de densidade de probabilidade e o formato da curva não é perfeitamente um *sino*, mas se aproxima. O histograma da distribuição de pesos também é mostrado nessa figura.
 
 ```{r}
 set.seed(1234)
-y <- rnorm(800, mean = 3.4, sd = 0.7)
+media = 3.4
+desvio = 0.7
+y <- rnorm(800, mean = media, sd = desvio)
 x <- seq(1:800)
 df <- tibble(x = x, `Peso(kg)` = y)
-g <- ggplot(data = df) + 
-  geom_density(aes(x = `Peso(kg)`)) +
-  labs(x = "Peso(kg)", y = "Densidade de Probabilidade") + 
+g <- ggplot(data = df, aes(x = `Peso(kg)`, after_stat(density))) + 
+  geom_density(outline.type = "full") + 
+  geom_histogram(alpha = 0.3 ) +
+  labs(x = "Peso(kg)", y = "Densid.Prob.") +
+#  scale_y_continuous(breaks = NULL, ) +
   theme_light() 
 ggplotly(g)
 ```
 
 
 
-O eixo *y* representa a *densidade de probabilidade de ocorrência de x*. Ao mover o mouse sobre os pontos, os valores de *x* e *y* são mostrados; você poderá verificar que quando se afasta da média *x = 3.4*, o valor de *y* vai ficando cada vez menor, isto é, a probabilidade de ocorrência deste valor de *x* vai ficando cada vez menor.
+O eixo *y* representa a *estimativa da densidade de probabilidade de ocorrência de x*. Você pode ler mais sobre Estimativa de Densidade de Probabilidade [aqui](https://bookdown.org/egarpor/PM-UC3M/npreg-npdens.html).
+
+
+<!-- algumas outras referencias sobre estimativa de densidade de probabilidade: 
+https://vita.had.co.nz/papers/density-estimation.pdf
+https://myweb.uiowa.edu/pbreheny/uk/teaching/621/notes/10-18.pdf
+https://www.r-bloggers.com/2013/06/exploratory-data-analysis-kernel-density-estimation-in-r-on-ozone-pollution-data-in-new-york-and-ozonopolis/
+https://cran.r-project.org/web/packages/kdensity/vignettes/tutorial.html
+https://github.com/admond1994/calculate-probability-from-probability-density-plots/blob/master/cal_probability.ipynb
+-->
+<!--
+Ao mover o mouse sobre os pontos, os valores de *x* e *y* são mostrados; você poderá verificar que quando se afasta da média *x = 3.4*, o valor de *y* vai ficando cada vez menor, isto é, a probabilidade de ocorrência deste valor de *x* vai ficando cada vez menor.
+-->
 
 ## Amostras
 
 Suponha que nosso biólogo colete uma amostra de 30 animais e faça a pesagem. Do ponto de vista da Teoria da Probabilidade, temos a seguinte definição:
 
-> Se a população da qual se extraem as amsotras tem distribuição normal, então a distribuição de probabilidade da média amostral também seguirá uma normal.
+> Se a população da qual se extraem as amostras tem distribuição normal, então a distribuição de probabilidade da média amostral também seguirá uma normal.
 
 Podemos simular um experimento que realize um grande número de amostragens, calcule a média de cada amostra e depois observamos a distribuição destas médias amostrais. 
 
@@ -82,10 +102,94 @@ amostra$P0 <- 0
 pesomedioamostra = mean(amostra$`Peso(kg)`)
 g + geom_point(aes(x = `Peso(kg)`, y = P0), data = amostra, color = "blue") +
   geom_segment(aes(x = pesomedioamostra, y = 0, xend=pesomedioamostra, yend = 0.05), color = "red") +
-  annotate("text", x = 1.05*pesomedioamostra, y = 0.07, label = paste("Média Amostra: ",  round(pesomedioamostra,3)))
+  annotate("text", x = 1.05*pesomedioamostra, y = 0.07, label = paste("Méd.Am. ",  round(pesomedioamostra,2)))
+```
+
+```{r}
+set.seed(1234)
+
+geragrafs <- function(g) {
+  amostra <- slice_sample(df, n = 30, replace = TRUE)
+  amostra$P0 <- 0
+  pesomedioamostra = mean(amostra$`Peso(kg)`)
+  novog <- g + geom_point(aes(x = `Peso(kg)`, y = P0), data = amostra, color = "blue") +
+               geom_segment(aes(x = pesomedioamostra, y = 0, xend=pesomedioamostra, yend = 0.05), 
+                            color = "red") +
+               annotate("text", x = 1.05*pesomedioamostra, y = 0.07, 
+                        label = paste("Méd.Am.: ",  round(pesomedioamostra,3)))
+}
+
+```
+
+Agora com 10 amostras.
+
+```{r}
+h1 <- geragrafs(g)
+h2 <- geragrafs(g)
+h3 <- geragrafs(g)
+h4 <- geragrafs(g)
+h5 <- geragrafs(g)
+h6 <- geragrafs(g)
+h7 <- geragrafs(g)
+h8 <- geragrafs(g)
+h9 <- geragrafs(g)
+h10 <- geragrafs(g)
+```
+
+```{r}
+ggpubr::ggarrange(h1,h2,h3,h4,h5,h6,h7,h8,h9,h10, nrow = 5, ncol = 2)
 ```
 
 
+
+Se tomarmos 100 amostras de 30 elementos, e calcularmos a média amostral, teremos o seguinte resultado:
+
+```{r}
+set.seed(1234)
+mediasamostrais <- function(df, N) {
+  medias <- c()
+  for (I in seq(1:N)) {
+     amostra <- slice_sample(df, n = 30, replace = TRUE)
+     amostra$P0 <- 0
+     pesomedioamostra = mean(amostra$`Peso(kg)`, na.rm = TRUE)
+     medias[I] <- pesomedioamostra
+  }
+  return(medias)
+}
+
+
+```
+
+```{r}
+mediasam <- mediasamostrais(df, 1000)
+mediasam_est <- t.test(mediasam)
+mediasam_mean <- as.numeric(mediasam_est$estimate)
+mediasam_confint <- as.numeric(mediasam_est$conf.int)
+#plot(density(mediasam))
+#hist(mediasam, breaks = 30)
+
+dfmedias <- tibble(x = mediasam)
+ggplot(dfmedias, aes(x = x, after_stat(density))) + 
+  geom_density() + 
+  geom_histogram(alpha = 0.3) + 
+  geom_segment(aes(x = mediasam_mean, y = 0, xend=mediasam_mean, yend = 0.15), 
+                            color = "red", size = 0.15) +
+  geom_segment(aes(x = mediasam_confint[1], y = 0, xend=mediasam_confint[1], yend = 0.15), 
+                            color = "blue", size = 0.15) +
+  geom_segment(aes(x = mediasam_confint[2], y = 0, xend=mediasam_confint[2], yend = 0.15), 
+                            color = "blue", size = 0.15) +
+ annotate("text", x = 1.003*mediasam_mean, y = 0.75, 
+                        label = paste("Média das Médias Amostrais: \n",  round(mediasam_mean,3)), size = 3) +
+ annotate("text", x = 0.993*mediasam_mean, y = 0.5, 
+                        label = paste(" (%95 CI): [",  round(mediasam_confint[1],3), ",",
+                                      round(mediasam_confint[2],3), "]"), size = 3) +
+  labs(x = "Médias de Peso das Amostras (kg)", y = "Densid.Prob.") + 
+  #scale_y_continuous(breaks = NULL) + 
+  theme_light()
+
+```
+
+Como observamos na figura acima, a média das médias amostrais (`r round(mediasam_mean, 3)`) tende para a média verdadeira (`r media`) quando tomamos um grande número de amostras.
 
 ```{r eval = FALSE}
 x <- seq(-4,4, by = 0.01)
@@ -121,7 +225,7 @@ Continuando nosso exemplo da população de animais que estamos estudando, supon
 Se fizéssemos um senso novamente, pesando todos os animas daquela população, poderíamos encontrar uma *nova distribuição de pesos*, gerando uma segunda curva, como mostrado na figura abaixo.
 
 
-```{r}
+```{r eval = FALSE}
 x <- seq(-4,4, by = 0.01)
 y <- dnorm(x)
 df1 <- tibble(x = x, y = y, epoca = "Primeira")
