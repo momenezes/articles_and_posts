@@ -23,6 +23,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(plotly)
 library(ggpubr)
+library(ggthemes)
 ```
 
 
@@ -159,8 +160,11 @@ ggarrange(plotlist = graficosN10, nrow = 5, ncol = 2) %>%
   annotate_figure(top = text_grob(paste0("Experimento com ", Qtde, " amostras de tamanho = ", SSize), face = "bold", size = 16))
 ```
 
-Veja como em ambas as figuras, sempre temos uma maior concentração de pontos azuis na região próxima da média da população; isso ocorre porque temos um maior número de animais cujo peso está nessa região, isto é, peso próximo da média da população. Mas também temos animais com peso bem maior ou bem menor do que a média; eles são mais raros nas amostras, porque são mais raros também na população.
+Veja como nas amostras com $n=30$ temos uma maior concentração de pontos azuis na região próxima da média da população; isso ocorre porque temos um maior número de animais cujo peso está nessa região, isto é, peso próximo da média da população. Nas amostras com $n = 10$ os pontos azuis são mais dispersos, o que provoca uma maior dispersão das médias destas amostras também. 
 
+Esse é outro conceito importante: **quanto maior o tamanho da amostra, mais próximo sua média será da média da população.**
+
+Mas também temos animais com peso bem maior ou bem menor do que a média; eles são mais raros nas amostras, porque são mais raros também na população.
 
 
 
@@ -275,9 +279,9 @@ ggplot(dfmediasSS10, aes(x = x, after_stat(density))) +
 
 
 
-Como observamos nas figuras acima, a média das médias amostrais tende para a média verdadeira, $\mu$ = `r media`, quando tomamos um grande número de amostras.
+Como observamos nas figuras acima, a média das médias amostrais tende para a média verdadeira, $\mu$ = `r media`, quando tomamos um grande número de amostras; também observamos que **a distribuição das médias amostrais (S) se aproxima de uma distribuição normal**, com média $\mu_S$ e desvio padrão $\sigma_S$.
 
-Mas quando o biólogo seleciona uma amostra apenas de $n = 30$ animais, o peso médio dos animais desta amostra pode ser bem distante da média verdadeira, como ilustrado na figura abaixo, onde uma amostra tem peso médio bem abaixo e outra com peso médio bem acima da média verdadeira; e aí podemos perguntar: 
+Mas quando o biólogo seleciona uma amostra apenas de $n = 30$ animais, o peso médio dos animais desta amostra pode ser distante da média verdadeira, como ilustrado na figura abaixo, onde uma amostra tem peso médio bem abaixo e outra com peso médio bem acima da média verdadeira; e aí podemos perguntar: 
 
 > Será que aconteceu alguma coisa que levou a uma diminuição ou aumento geral do peso destes animais (de toda a população) ou é apenas nesta amostra? 
 
@@ -296,11 +300,49 @@ ggarrange(graficosN30[[menormedia]],graficosN30[[maiormedia]])
 
 Para responder a esta pergunta podemos realizar o *Teste de Hipótese*.
 
+A primeira coisa a fazer é declarar as hipóteses que serão testadas:
+
+* A hipótese nula ($\textrm{H}_0$) é a que expressa a ideia de que não houve alteração na média da população, ou seja, não temos *outra* população;
+* A hipótese alternativa ($\textrm{H}_1$) é a que expressa a ideia complementar, ou seja, houve alguma alteração significativa, gerando uma *nova* população.
+
+Matematicamente, escrevemos assim:
+
+* $\textrm{H}_0: \mu = \mu_0$
+* $\textrm{H}_1: \mu \neq \mu_0$
+
+onde $\mu$ é o parâmetro conhecido da população (média) e $\mu_0$ é o valor de teste, obtido da amostra. Quando a hipótese alternativa ($\textrm{H}_1$) é expressa como **diferença** ($\neq$), temos um teste bilateral; quando $\textrm{H}_1$ é expressa como $>$ ou $<$ temos um teste unilateral. 
+
+A conclusão do teste de hipótese é uma afirmação que pode estar certa ou errada; definimos um limite para a probabilidade de estarmos errados em nossa afirmação sobre $\textrm{H}_0$, chamado de nível de significância. São comuns valores de $0.05$ ou $0.01$ para este nível de significância, representado pela letra grega $\alpha$.
+
+Retomando o conceito da distribuição das médias amostrais **S**, definimos a distribuição da variável reduzida (ou *escore* **z**) por $$z = \frac{(S - \mu_S)}{\sigma_S}$$ que tem média 0 e variância 1, representada na figura abaixo, onde são mostrados os limites de aceitação dos valores de **z**. 
+
+```{r }
+x <- seq(-4,4,by = 0.01)
+dfnorm <- data.frame(x = x, d = dnorm(x))
+alpha = 0.05
+# teste bilateral
+rc_b <- qnorm(alpha/2)
+rc_u <- qnorm(1 - alpha/2)
+gnorm <- ggplot(data = dfnorm) + geom_line(aes(x=x,y=d))
+gnorm <- gnorm + geom_ribbon(data = subset(dfnorm, x>=-4 & x <= rc_b), aes(ymax = d,x=x), ymin=0, fill='red', colour=NA, alpha=0.5) + geom_ribbon(data = subset(dfnorm, x>=rc_u & x < 4), aes(ymax = d, x=x), ymin=0, fill='red', colour=NA, alpha=0.5)  + geom_ribbon(data = subset(dfnorm, x>=rc_b & x <= rc_u+0.011), aes(ymax = d, x = x), ymin=0, fill='blue', colour=NA, alpha=0.3) + theme_light() +  theme(plot.caption = element_text(hjust = 0)) + labs(x="z", y='Densidade de Probabilidade' )
+#gnorm <- gnorm + geom_segment(aes(x = -abs(z), y = dnorm(-abs(z)), xend = -abs(z), yend = 0,colour='z'), colour='blue') + geom_segment(aes(x = abs(z), y = dnorm(abs(z)), xend = abs(z), yend = 0,colour='z'), colour='blue')
+gnorm <- gnorm + annotate("text",x = -abs(rc_b), y = -0.025, label = "-|z.alpha|", size = 3.5) 
+gnorm <- gnorm + annotate("text",x = abs(rc_u), y = -0.025, label = "|z.alpha|", size = 3.5)
+gnorm <- gnorm + annotate("text", x = rc_b - 0.1, y = dnorm(-rc_b) + 0.025, label = as.character( expression( paste( alpha,"/2"))), parse = TRUE, size = 4)
+gnorm <- gnorm + annotate ("text", x = rc_u + 0.1, y = dnorm(rc_u) + 0.025, label = as.character( expression( paste( alpha,"/2"))), parse = TRUE, size = 4)
+gnorm <- gnorm + annotate("text", x = 0, y = 0.2, label = as.character(expression(paste("Região de Aceitação"))), parse = TRUE, size = 4)
+gnorm + geom_segment(aes(x = -2.5,y = 0.01, xend = -3, yend = 0.05), colour = 'black',size = 0.1) + annotate("text", x = -3, y = 0.06, label = as.character(expression(paste("Região Crítica"))), parse = TRUE, size = 4) + geom_segment(aes(x = 2.5,y = 0.01, xend = 3, yend = 0.05), colour = 'black',size = 0.1) + annotate("text", x = -3, y = 0.06, label = as.character(expression(paste("Região Crítica"))), parse = TRUE, size = 4) + annotate("text", x = 3, y = 0.06, label = as.character(expression(paste("Região Crítica"))), parse = TRUE, size = 4) + scale_x_continuous(name="X", limits=c(-4, 4), breaks=seq(-4, 4,by=0.5))
+```
+
+
+Quando utilizamos uma amostra de tamanho reduzido, p.explo, $n = 30$, utilizamos a média amostral como estimador da média populacional, e o *erro padrão da média* como estimador do desvio padrão populacional, ou seja, $\sigma_S = \sigma_{\bar{x}} = \sigma/\sqrt{N}$, onde $\sigma$ é o desvio padrão da população e $N$ o tamanho da amostra. O *escore* **z** será dado então por: $$z = \frac{\bar{x} - \mu}{\sigma/\sqrt{N}}$$ onde $\bar{x}$ é a média amostral.
+
 Os passos para realizar o Teste de Hipótese, considerando um nível de significância $\alpha = 0.05$,  são:
 
 1. Calcular a estatística de teste -- no caso, estatística $z$, porque **assumimos que nossos dados seguem uma distribuição normal** e conhecemos a média e o desvio padrão da população;
-$$z = \frac{\bar{x} - \mu_0}{\textrm{desvio}/\sqrt{n}}$$
-2. Calcular o valor crítico para o nível de significância definido;
+
+
+2. Calcular o valor crítico para o nível de significância definido, isto é, quais os limites da variável reduzida que ainda consideramos como *iguais* no teste de hipótese;
 $$z.alpha = qnorm(1 - alpha/2)$$
 3. Verificar se o valor da estatística de teste está na *Região de Aceitação* ou na *Região Crítica ou de Rejeição*  da hipótese nula. Uma definição importante é se o teste é unilateral ou bilateral. Para esse exemplo, vamos considerar um teste **bilateral**, ou seja, queremos saber se o peso médio dos animais mudou.
 
@@ -322,11 +364,11 @@ z.alpha <- qnorm(1 - alpha/2)
 
 Os resultados dos cálculos são:
 
-* media: `r media`
-* desvio padrão: `r desvio`
+* media populacional $\mu$: `r media`
+* desvio padrão da população: `r desvio`
 * tamanho da amostra: `r n`
-* $\bar{x}$: `r xbar`
-* estatística z: `r z`
+* média da amostra $\bar{x}$: `r xbar`
+* estatística **z**: `r z`
 * valor crítico (limites da região - teste bilateral): `r c(-z.alpha, z.alpha)`
 
 Então, o resultado do teste é:
@@ -350,11 +392,11 @@ z.alpha <- qnorm(1 - alpha/2)
 
 Os resultados dos cálculos são:
 
-* media: `r media`
-* desvio padrão: `r desvio`
+* media populacional $\mu$: `r media`
+* desvio padrão da população: `r desvio`
 * tamanho da amostra: `r n`
-* $\bar{x}$: `r xbar`
-* estatística z: `r z`
+* média amostral $\bar{x}$: `r xbar`
+* estatística **z**: `r z`
 * valor crítico (limites da região - teste bilateral): `r c(-z.alpha, z.alpha)`
 
 Então, o resultado do teste é:
