@@ -6,12 +6,12 @@ author:
   - name: Mario O. de Menezes
     url: https://momenezes.github.io/tutorials
     orcid_id: 0000-0003-0263-3541
-date: 10-30-2021
+date: 11-11-2021
 output:
   distill::distill_article:
     self_contained: false
     highlight: tango
-draft: true
+draft: false
 ---
 
 
@@ -28,6 +28,8 @@ library(ggthemes)
 
 
 # Teste de Hipótese
+
+<p style="font-size:8; font-color:#222222">Versão Preliminar</p>
 
 ## População e Amostra
 
@@ -96,7 +98,7 @@ Suponha que nosso biólogo colete uma amostra dos animais e faça a pesagem. Do 
 
 Podemos simular um experimento que realize um grande número de amostragens, calcule a média de cada amostra e depois observamos a distribuição destas médias amostrais. 
 
-Começamos com a ilustração de uma amostra de $n = 30$ dos animais em estudo, conforme mostrado na figura abaixo, onde os pontos de cor azul representam a amostra.
+Começamos com a ilustração de uma amostra de $n = 30$ dos animais em estudo, conforme mostrado na figura abaixo, onde os pontos de cor azul representam a amostra, ou seja, os animais selecionados aleatoriamente da população.
 
 ```{r}
 set.seed(1234)
@@ -107,7 +109,7 @@ pesomedioamostra = mean(amostra$`Peso(kg)`)
 g + geom_point(aes(x = `Peso(kg)`, y = P0), data = amostra, color = "blue") +
   geom_segment(aes(x = pesomedioamostra, y = 0, xend=pesomedioamostra, yend = 0.05), color = "red") +
   annotate("text", x = 1.0*pesomedioamostra, y = 0.07, label = paste("Méd.Am. ",  round(pesomedioamostra,2)), size = 3) +
-  ggtitle(paste("Experimento com uma amostra de tamanho = ",n))
+  ggtitle(paste("Amostra de tamanho = ",n,"(pontos azuis)\nHistograma e Curva de Densid. originais"))
 ```
 
 
@@ -134,7 +136,7 @@ geraamostras <- function(df, qts, N){
 
 ```
 
-Agora com 10 amostras com $n = 30$; veja como os valores das amostras (pontos em azul) ocorrem em cada uma. É importante lembrar deste conceito quando falamos de uma amostra. 
+Agora com 10 amostras com $n = 30$; veja como os valores das amostras (pontos em azul) ocorrem em cada uma. É importante lembrar deste conceito quando falamos de uma amostra, isto é, a variabilidade dos valores encontrados em uma amostra, incluindo a dispersão dos pontos em torno da média. 
 
 ```{r fig.height=20}
 SSize <- 30
@@ -143,7 +145,8 @@ amostrasN30 <- geraamostras(df, Qtde, SSize)
 graficosN30 <- lapply(amostrasN30, FUN = function(x) geragrafs(g, x))
 
 ggarrange(plotlist = graficosN30, nrow = 5, ncol = 2) %>%
-  annotate_figure(top = text_grob(paste0("Experimento com ", Qtde, " amostras de tamanho = ", SSize), face = "bold", size = 16))
+  annotate_figure(top = text_grob(paste0("Experimento com ", Qtde, " amostras de tamanho = ", SSize,
+                                         "\nHistograma e curva densid. originais"), face = "bold", size = 16))
 ```
 
 Observe como as médias das amostras variam; ora são maiores ora menores do que a média da população ($\mu = 3.4$). 
@@ -157,14 +160,15 @@ amostrasN10 <- geraamostras(df, Qtde, SSize)
 graficosN10 <- lapply(amostrasN10, FUN = function(x) geragrafs(g, x))
 
 ggarrange(plotlist = graficosN10, nrow = 5, ncol = 2) %>%
-  annotate_figure(top = text_grob(paste0("Experimento com ", Qtde, " amostras de tamanho = ", SSize), face = "bold", size = 16))
+  annotate_figure(top = text_grob(paste0("Experimento com ", Qtde, " amostras de tamanho = ", SSize,
+                                         "\nHistograma e curva densid. originais"), face = "bold", size = 16))
 ```
 
 Veja como nas amostras com $n=30$ temos uma maior concentração de pontos azuis na região próxima da média da população; isso ocorre porque temos um maior número de animais cujo peso está nessa região, isto é, peso próximo da média da população. Nas amostras com $n = 10$ os pontos azuis são mais dispersos, o que provoca uma maior dispersão das médias destas amostras também. 
 
-Esse é outro conceito importante: **quanto maior o tamanho da amostra, mais próximo sua média será da média da população.**
+Esse é outro conceito importante: **quanto maior o tamanho da amostra, mais próximo sua média será da média da população**.
 
-Mas também temos animais com peso bem maior ou bem menor do que a média; eles são mais raros nas amostras, porque são mais raros também na população.
+Em ambas as situações temos animais com peso bem maior ou bem menor do que a média; eles são mais raros nas amostras, porque são mais raros também na população.
 
 
 
@@ -192,7 +196,7 @@ Qtde <- 1000
 
 ### Grande Número de Amostras
 
-Vamos agora coletar `r Qtde` amostras de `r SSize` elementos; para cada amostra calculamos a média do peso dos animas e construímos um histograma com o respectivo gráfico de densidade de probabilidade, como mostrado na figura abaixo. Também calculamos a média das médias das amostras, que é mostrada na figura, juntamente com o intervalo de confiança de 95%.
+Vamos agora coletar `r Qtde` amostras de `r SSize` elementos; para cada amostra calculamos a média do peso dos animas e construímos um histograma com o respectivo gráfico de densidade de probabilidade, como mostrado na figura abaixo. Também calculamos a média das médias das amostras, que é mostrada na figura, juntamente com o intervalo de confiança (**CI**)de 95%.
 
 ```{r}
 milamostras <- geraamostras(df, Qtde, SSize)
@@ -225,7 +229,8 @@ ggplot(dfmedias, aes(x = x, after_stat(density))) +
                         label = paste(" (%95 CI): [",  round(mediasam_confint[1],3), ",",
                                       round(mediasam_confint[2],3), "]"), size = 3) +
   labs(x = "Médias de Peso das Amostras (kg)", y = "Densid.Prob.") + 
-  ggtitle(paste0("Experimento com ", Qtde, " amostras de tamanho n = ", SSize)) +
+  ggtitle(paste0("Experimento com ", Qtde, " amostras de tamanho n = ", SSize,
+                 "\nHistograma e curva densid. médias amostrais")) +
   theme_light()
 
 ```
@@ -272,7 +277,8 @@ ggplot(dfmediasSS10, aes(x = x, after_stat(density))) +
                         label = paste(" (%95 CI): [",  round(mediasam_confint[1],3), ",",
                                       round(mediasam_confint[2],3), "]"), size = 3) +
   labs(x = "Médias de Peso das Amostras (kg)", y = "Densid.Prob.") + 
-  ggtitle(paste0("Experimento com ", Qtde, " amostras de tamanho n = ", SSize)) +
+  ggtitle(paste0("Experimento com ", Qtde, " amostras de tamanho n = ", SSize,
+                 "\nHistograma e curva densid. médias amostrais")) +
   theme_light()
 
 ```
@@ -280,6 +286,8 @@ ggplot(dfmediasSS10, aes(x = x, after_stat(density))) +
 
 
 Como observamos nas figuras acima, a média das médias amostrais tende para a média verdadeira, $\mu$ = `r media`, quando tomamos um grande número de amostras; também observamos que **a distribuição das médias amostrais (S) se aproxima de uma distribuição normal**, com média $\mu_S$ e desvio padrão $\sigma_S$.
+
+### Amostras pequenas
 
 Mas quando o biólogo seleciona uma amostra apenas de $n = 30$ animais, o peso médio dos animais desta amostra pode ser distante da média verdadeira, como ilustrado na figura abaixo, onde uma amostra tem peso médio bem abaixo e outra com peso médio bem acima da média verdadeira; e aí podemos perguntar: 
 
@@ -294,7 +302,9 @@ mediasamostrasSS30 <- sapply(amostrasN30, function(x) {
 )
 menormedia <- which(mediasamostrasSS30 == min(mediasamostrasSS30))
 maiormedia <- which(mediasamostrasSS30 == max(mediasamostrasSS30))
-ggarrange(graficosN30[[menormedia]],graficosN30[[maiormedia]])
+ggarrange(graficosN30[[menormedia]],graficosN30[[maiormedia]]) %>%
+  annotate_figure(top = text_grob(paste0("Amostras de tamanho n = 30",
+                                         "\nHistograma e curva densid. originais"), face = "bold", size = 16))
 ```
 
 
@@ -310,7 +320,7 @@ Matematicamente, escrevemos assim:
 * $\textrm{H}_0: \mu = \mu_0$
 * $\textrm{H}_1: \mu \neq \mu_0$
 
-onde $\mu$ é o parâmetro conhecido da população (média) e $\mu_0$ é o valor de teste, obtido da amostra. Quando a hipótese alternativa ($\textrm{H}_1$) é expressa como **diferença** ($\neq$), temos um teste bilateral; quando $\textrm{H}_1$ é expressa como $>$ ou $<$ temos um teste unilateral. 
+onde $\mu$ é o parâmetro conhecido da população (média) e $\mu_0$ (ou $\bar{x}$) é o valor de teste, obtido da amostra. Quando a hipótese alternativa ($\textrm{H}_1$) é expressa como **diferença** ($\neq$), temos um teste bilateral; quando $\textrm{H}_1$ é expressa como $>$ ou $<$ temos um teste unilateral. 
 
 A conclusão do teste de hipótese é uma afirmação que pode estar certa ou errada; definimos um limite para a probabilidade de estarmos errados em nossa afirmação sobre $\textrm{H}_0$, chamado de nível de significância. São comuns valores de $0.05$ ou $0.01$ para este nível de significância, representado pela letra grega $\alpha$.
 
@@ -331,7 +341,8 @@ gnorm <- gnorm + annotate("text",x = abs(rc_u), y = -0.025, label = "|z.alpha|",
 gnorm <- gnorm + annotate("text", x = rc_b - 0.1, y = dnorm(-rc_b) + 0.025, label = as.character( expression( paste( alpha,"/2"))), parse = TRUE, size = 4)
 gnorm <- gnorm + annotate ("text", x = rc_u + 0.1, y = dnorm(rc_u) + 0.025, label = as.character( expression( paste( alpha,"/2"))), parse = TRUE, size = 4)
 gnorm <- gnorm + annotate("text", x = 0, y = 0.2, label = as.character(expression(paste("Região de Aceitação"))), parse = TRUE, size = 4)
-gnorm + geom_segment(aes(x = -2.5,y = 0.01, xend = -3, yend = 0.05), colour = 'black',size = 0.1) + annotate("text", x = -3, y = 0.06, label = as.character(expression(paste("Região Crítica"))), parse = TRUE, size = 4) + geom_segment(aes(x = 2.5,y = 0.01, xend = 3, yend = 0.05), colour = 'black',size = 0.1) + annotate("text", x = -3, y = 0.06, label = as.character(expression(paste("Região Crítica"))), parse = TRUE, size = 4) + annotate("text", x = 3, y = 0.06, label = as.character(expression(paste("Região Crítica"))), parse = TRUE, size = 4) + scale_x_continuous(name="X", limits=c(-4, 4), breaks=seq(-4, 4,by=0.5))
+gnorm + geom_segment(aes(x = -2.5,y = 0.01, xend = -3, yend = 0.05), colour = 'black',size = 0.1) + annotate("text", x = -3, y = 0.06, label = as.character(expression(paste("Região Crítica"))), parse = TRUE, size = 4) + geom_segment(aes(x = 2.5,y = 0.01, xend = 3, yend = 0.05), colour = 'black',size = 0.1) + annotate("text", x = -3, y = 0.06, label = as.character(expression(paste("Região Crítica"))), parse = TRUE, size = 4) + annotate("text", x = 3, y = 0.06, label = as.character(expression(paste("Região Crítica"))), parse = TRUE, size = 4) + scale_x_continuous(name="X", limits=c(-4, 4), breaks=seq(-4, 4,by=0.5)) +
+  ggtitle("Curva normal da variável reduzida 'z'", subtitle = "Regiões de Aceitação e Rejeição, teste bilateral")
 ```
 
 
@@ -342,8 +353,8 @@ Os passos para realizar o Teste de Hipótese, considerando um nível de signific
 1. Calcular a estatística de teste -- no caso, estatística $z$, porque **assumimos que nossos dados seguem uma distribuição normal** e conhecemos a média e o desvio padrão da população;
 
 
-2. Calcular o valor crítico para o nível de significância definido, isto é, quais os limites da variável reduzida que ainda consideramos como *iguais* no teste de hipótese;
-$$z.alpha = qnorm(1 - alpha/2)$$
+2. Calcular o valor crítico para o nível de significância definido, isto é, quais os limites da variável reduzida que definem a Região de Aceitação da Hipótese Nula ($\textrm{H}_0$);
+$$\textrm{z.alpha} = \texttt{qnorm}(1 - \alpha/2)$$
 3. Verificar se o valor da estatística de teste está na *Região de Aceitação* ou na *Região Crítica ou de Rejeição*  da hipótese nula. Uma definição importante é se o teste é unilateral ou bilateral. Para esse exemplo, vamos considerar um teste **bilateral**, ou seja, queremos saber se o peso médio dos animais mudou.
 
 
@@ -364,12 +375,15 @@ z.alpha <- qnorm(1 - alpha/2)
 
 Os resultados dos cálculos são:
 
-* media populacional $\mu$: `r media`
-* desvio padrão da população: `r desvio`
-* tamanho da amostra: `r n`
-* média da amostra $\bar{x}$: `r xbar`
-* estatística **z**: `r z`
-* valor crítico (limites da região - teste bilateral): `r c(-z.alpha, z.alpha)`
+Grandeza      |       Valor
+--------------|-----------------
+Média Popul.  |   `r media`
+Desvio Padrão |   `r desvio`
+Tam.Amostra   |    `r n`
+Média Amostra |    `r xbar`
+Estat. **z**  |   `r z`
+Limites Críticos |  `r c(-z.alpha,z.alpha)`
+
 
 Então, o resultado do teste é:
 
@@ -392,12 +406,15 @@ z.alpha <- qnorm(1 - alpha/2)
 
 Os resultados dos cálculos são:
 
-* media populacional $\mu$: `r media`
-* desvio padrão da população: `r desvio`
-* tamanho da amostra: `r n`
-* média amostral $\bar{x}$: `r xbar`
-* estatística **z**: `r z`
-* valor crítico (limites da região - teste bilateral): `r c(-z.alpha, z.alpha)`
+Grandeza      |       Valor
+--------------|-----------------
+Média Popul.  |   `r media`
+Desvio Padrão |   `r desvio`
+Tam.Amostra   |    `r n`
+Média Amostra |    `r xbar`
+Estat. **z**  |   `r z`
+Limites Críticos |  `r c(-z.alpha,z.alpha)`
+
 
 Então, o resultado do teste é:
 
@@ -406,7 +423,7 @@ if(z > abs(z.alpha)) cat("Estatística de teste z está fora da região de aceit
 ```
 
 
-Observe que nós selecionamos as duas amostras acima da mesma população, mas mesmo assim, pelo Teste de Hipótese, uma delas,  a que tem peso médio maior, tem um peso médio que é considerado como oriundo de outra distribuição que não a original. 
+Observe que nós selecionamos as duas amostras acima da mesma população, mas mesmo assim, pelo Teste de Hipótese, uma delas, a de peso médio maior, tem um peso médio que não podemos afirmar que seja da mesma população original; ele pode ser considerado como oriundo de outra distribuição que não a original. 
 
 > Quando realizamos um Teste de Hipótese estamos querendo verificar se a amostra analisada vem ou não da população original para a qual conhecemos os parâmetros. A média amostral será o valor utilizado na verificação.
 
@@ -434,13 +451,15 @@ $$z = \frac{x_i - \bar{x}}{\sqrt(n)\times \sigma}$$
 Continuando nosso exemplo da população de animais que estamos estudando, suponha agora que houve algum evento, ou fator, que tenha alterado o suprimento de alimento para os animais. Nessa situação, depois de algum tempo, pode ter havido uma *diminuição* do peso (massa corporal) destes animais.
 
 ```{r}
-# adicionando um delta variável a cada valor de y para gerar a segunda população
+# poderia adicionar um delta variável a cada valor de y para gerar a segunda população
 #y2 <- df$`Peso(kg)` + runif(length(df$x),min = -.7, max = -.2)
-media2 = 2.9
+# mas vou definir a segunda população com media 2.9 e desvio 0.8
+media2 = 3.0
 desvio2 = 0.8
 tam = 8000
 # gerando a segunda população da mesma maneira da original, i.e., especificando
 # média e desvio padrão - vou usar este método
+set.seed(1234)
 y2 <- rnorm(tam, mean = media2, sd = desvio2)
 df$Pop <- "Original"
 df2 <- bind_rows(tibble(x = df$x, `Peso(kg)` = y2, Pop = "Nova"), df)
@@ -451,16 +470,226 @@ Se fizéssemos um senso novamente, pesando todos os animas daquela população, 
 
 
 ```{r }
-g <- ggplot(data = df2, aes(x = `Peso(kg)`, after_stat(density))) + 
+g2 <- ggplot(data = df2, aes(x = `Peso(kg)`, after_stat(density))) + 
   geom_density(aes(color = Pop), outline.type = "full") + 
   #geom_histogram(aes(fill = Pop), alpha = 0.3 ) +
-  labs(x = "Peso(kg)", y = "Densid.Prob.") +
+  labs(x = "Peso(kg)", y = "Densid.Prob.", color = "População") +
   theme_light() 
-ggplotly(g  + ggtitle(paste("Distribuição dos pesos das populações (n=",tam,")")))
+ggplotly(g2  + ggtitle(paste("Distribuição dos pesos das populações (n=",tam,")")))
 ```
 
 Como o desvio padrão desta nova distribuição é um pouco maior que da original, a curva de densidade de probabilidade é mais achatada (larga) e por isso, tem uma altura (máximo da densidade) menor.
 
 
+### Novas amostras
+
+Se tomamos **uma** amostra da nossa população, sem saber que houve o evento modificador, podemos ter a seguinte situação, ilustrada na figura abaixo.
+
+```{r}
+set.seed(12345)
+n = 30
+amostraorig <- slice_sample(filter(df2, Pop == "Original"), n = n, replace = TRUE)
+amostranova <- slice_sample(filter(df2, Pop == "Nova"), n = n, replace = TRUE)
+amostraorig$P0 <- 0
+amostranova$P0 <- 0.02
+pesomedioamostraorig = mean(amostraorig$`Peso(kg)`)
+pesomedioamostranova = mean(amostranova$`Peso(kg)`)
+g3 <- g2 + geom_point(aes(x = `Peso(kg)`, y = P0), data = amostraorig, color = "blue") +
+  geom_segment(aes(x = pesomedioamostraorig, y = 0, xend=pesomedioamostraorig, yend = 0.05), color = "blue") +
+  annotate("text", x = 1.09*pesomedioamostraorig, y = 0.07, label = paste("Méd.Am.Orig. ",  round(pesomedioamostraorig,2)), size = 3) +
+    geom_point(aes(x = `Peso(kg)`, y = P0), data = amostranova, color = "red") +
+    geom_segment(aes(x = pesomedioamostranova, y = 0.02, xend=pesomedioamostranova, yend = 0.05), color = "red") +
+  annotate("text", x = .85*pesomedioamostranova, y = 0.085, label = paste("Méd.Am.Nova",  round(pesomedioamostranova,2)), size = 3) +
+  ggtitle(paste("Amostras de tamanho = ",n, "\nHistograma e curvas originais"))
+ggplotly(g3)
+```
+
+Os pontos azuis são elementos tomados da população original enquanto os pontos vermelhos são da nova população. Qualquer uma destas amostras é possível, ou seja, sem saber o que ocorreu, poderíamos ter qualquer uma delas.
+
+
+
+```{r }
+geragrafs2 <- function(g2, amostraorig, amostranova) {
+   amostraorig$P0 <- 0
+   amostranova$P0 <- 0.02
+   pesomedioamostraorig = mean(amostraorig$`Peso(kg)`)
+   pesomedioamostranova = mean(amostranova$`Peso(kg)`)
+   g3 <- g2 + geom_point(aes(x = `Peso(kg)`, y = P0), data = amostraorig, color = "blue") +
+              geom_segment(aes(x = pesomedioamostraorig, y = 0, xend=pesomedioamostraorig, 
+                               yend = 0.05), color = "blue") +
+   annotate("text", x = 1.09*pesomedioamostraorig, y = 0.07, label = paste("Méd.Am.Orig. ",
+                                                  round(pesomedioamostraorig,2)), size = 3) +
+    geom_point(aes(x = `Peso(kg)`, y = P0), data = amostranova, color = "red") +
+    geom_segment(aes(x = pesomedioamostranova, y = 0.02, xend=pesomedioamostranova, 
+                     yend = 0.05), color = "red") +
+    annotate("text", x = .85*pesomedioamostranova, y = 0.085, 
+             label = paste("Méd.Am.Nova",  round(pesomedioamostranova,2)), size = 3)
+    g3
+}
+
+```
+
+```{r}
+SSize <- 30
+Qtde <- 10
+```
+
+
+Agora vamos gerar `r Qtde` amostras das duas distribuições, para visualizarmos como se comportam as médias.
+As amostras tem n = `r SSize`; veja como os valores dos pesos nas amostras (pontos em azul e vermelho) ocorrem em cada uma.
+
+```{r fig.height=20}
+amostrasorigN30 <- geraamostras(filter(df2, Pop == "Original"), Qtde, SSize)
+amostrasnovaN30 <- geraamostras(filter(df2, Pop == "Nova"), Qtde, SSize)
+ams <- rbind(amostrasorigN30,amostrasnovaN30)
+graficos2N30 <- list()
+seqI <- seq(1,length(ams), by = 2)
+seqJ <- 1:round(length(ams)/2)
+seqs <- list(seqI=seqI, seqJ=seqJ)
+for (I in 1:length(seqs$seqI)) {
+  graficos2N30[[seqs$seqJ[I]]] <- geragrafs2(g2, ams[[seqs$seqI[I]]], ams[[seqs$seqI[I]+1]])
+}
+ggarrange(plotlist = graficos2N30, nrow = 5, ncol = 2)  %>%
+  annotate_figure(top = text_grob(paste0("Experimento com ", Qtde, " amostras de tamanho = ", SSize,
+                                         "\nHistograma e curva densid. originais"), face = "bold", size = 16))
+```
+
+Veja como as médias das amostras de ambas distribuições vagueiam ao longo da distribuição de pesos, ora para um lado ora para o outro lado. Se aumentássemos o número de amostras essa variação ficaria ainda mais evidente.
+
+Uma das possibilidades neste tipo de experimento (grande quantidade de amostras) é a mostrada na figura abaixo, onde temos duas amostras com médias muito próximas, mas vindo de populações diferentes. 
+
+```{r}
+mediasamostrasorigSS30 <- sapply(amostrasorigN30, function(x) {
+  mediaPeso <- mean(x$`Peso(kg)`, na.rm = TRUE)
+  mediaPeso
+}
+)
+
+mediasamostrasnovaSS30 <- sapply(amostrasnovaN30, function(x) {
+  mediaPeso <- mean(x$`Peso(kg)`, na.rm = TRUE)
+  mediaPeso
+}
+)
+
+
+menormedia2 <- which(mediasamostrasorigSS30 == min(mediasamostrasorigSS30))
+maiormedia2 <- which(mediasamostrasnovaSS30 == max(mediasamostrasnovaSS30))
+ggarrange(graficos2N30[[menormedia2]],graficos2N30[[maiormedia2]])# %>%
+#  annotate_figure(top = text_grob(paste0("Amostras de tamanho n = 30",
+#                                         "\nHistograma e curva densid. originais"), face = "bold", size = 16))
+```
+
+Uma coincidência ocorreu na figura anterior: tanto o gráfico com a amostra da nova população com a maior média como o gráfico com a amostra da população original com a menor média são os mesmos; poderiam ser diferentes, ou seja, a amostra da nova população com a maior média poderia estar em um gráfico e a amostra da população original com a menor média poderia estar em outro.
+
+
+### Teste de Hipótese
+
+Agora, vamos realizar o Teste de Hipótese da seguinte forma:
+
+1. Selecionando a amostra da população, primeiro da original com menor média, e depois da nova com maior média; 
+2. Calcular dois valores de estatística **z**:
+    * Um para a população original (**z.orig**)
+    * Um para a nova população (**z.nova**)
+3. Realizar o teste.
+
+
+#### Amostra da população original com menor média
+
+
+```{r}
+xbar <- min(mediasamostrasorigSS30)
+n <- 30
+alpha = 0.05
+z.orig <- (xbar - media)/(desvio/sqrt(n))
+z.nova <- (xbar - media2)/(desvio2/sqrt(n))
+z.alpha <- qnorm(1 - alpha/2)
+```
+
+
+Os resultados dos cálculos são:
+
+Grandeza      |     População     |    Valor
+--------------|-------------------|----------------
+Média Popul.  |     Original      | `r media`
+Média Popul.  |     Nova          | `r media2`
+Desvio Padrão |  Original         | `r desvio`
+Desvio Padrão |  Nova             | `r desvio2`
+Tam.Amostra   |    Ambas          |  `r n`
+Média Amostra |    Original       |  `r xbar`
+Estat. **z** (Amostra/População)  |    Original/Original  |  `r z.orig`
+Estat. **z** (Amostra/População) |    Original/Nova      |  `r z.nova`
+Limites Críticos | Ambas          |  `r c(-z.alpha,z.alpha)`
+
+
+**Resultado do Teste em relação à população original**
+
+```{r}
+if(abs(z.orig) > abs(z.alpha)) cat("Estatística de teste z está fora da região de aceitação, portanto rejeitamos a hipótese nula.") else cat("Estatística de teste z está dentro da região de aceitação, portanto aceitamos a hipótese nula.")
+```
+
+**Resultado do Teste em relação à população nova**
+
+```{r}
+if(abs(z.nova) > abs(z.alpha)) cat("Estatística de teste z está fora da região de aceitação, portanto rejeitamos a hipótese nula.") else cat("Estatística de teste z está dentro da região de aceitação, portanto aceitamos a hipótese nula.")
+```
+
+
+A amostra tomada da população original **passou** no teste em relação à sua própria população, mas foi **rejeitada** no teste em relação à nova população.
+
+
+#### Amostra da nova população com maior média
+
+
+```{r}
+xbar2 <- max(mediasamostrasnovaSS30)
+n <- 30
+alpha = 0.05
+z.nova2 <- (xbar2 - media2)/(desvio2/sqrt(n))
+z.orig2 <- (xbar2 - media)/(desvio/sqrt(n))
+z.alpha <- qnorm(1 - alpha/2)
+```
+
+
+Os resultados dos cálculos são:
+
+Grandeza      |     População     |    Valor
+--------------|-------------------|----------------
+Média Popul.  |     Original      | `r media`
+Média Popul.  |     Nova          | `r media2`
+Desvio Padrão |  Original         | `r desvio`
+Desvio Padrão |  Nova             | `r desvio2`
+Tam.Amostra   |    Ambas          |  `r n`
+Média Amostra |    Nova           |  `r xbar2`
+Estat. **z** (Amostra/População)  |    Nova/Original   | `r z.orig2`
+Estat. **z** (Amostra/População)  |    Nova/Nova      |   `r z.nova2`
+Limites Críticos | Ambas          |  `r c(-z.alpha,z.alpha)`
+
+
+**Resultado do Teste em relação à população original**
+
+```{r}
+if(abs(z.orig2) > abs(z.alpha)) cat("Estatística de teste z está fora da região de aceitação, portanto rejeitamos a hipótese nula.") else cat("Estatística de teste z está dentro da região de aceitação, portanto aceitamos a hipótese nula.")
+```
+
+**Resultado do Teste em relação à população nova**
+
+```{r}
+if(abs(z.nova2) > abs(z.alpha)) cat("Estatística de teste z está fora da região de aceitação, portanto rejeitamos a hipótese nula.") else cat("Estatística de teste z está dentro da região de aceitação, portanto aceitamos a hipótese nula.")
+```
+
+
+Observe que a amostra tomada da nova população **passou** no teste em relação à população original, assim como **passou** no teste em relação à sua própria população (a nova). Neste caso, nosso biólogo não poderia afirmar que houve algum evento que de fato modificou a média de peso da população, porque na amostra tomada de forma aleatória, a média estava dentro dos limites de aceitação também da população original.
+
+### Grande número de amostras de ambas as populações
+
+Vamos realizar um experimento, selecionando um grande número de amostras de ambas as populações e tabulando o resultado do teste de hipótese em relação a ambas.
+
+```{r}
+SSize <- 30
+Qtde <- 100
+cemamostrasorigN30 <- geraamostras(filter(df2, Pop == "Original"), Qtde, SSize)
+cemamostrasnovaN30 <- geraamostras(filter(df2, Pop == "Nova"), Qtde, SSize)
+cemams <- rbind(cemamostrasorigN30,cemamostrasnovaN30)
+```
 
 
