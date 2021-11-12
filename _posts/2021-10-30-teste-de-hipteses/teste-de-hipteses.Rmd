@@ -326,7 +326,7 @@ A conclusão do teste de hipótese é uma afirmação que pode estar certa ou er
 
 Retomando o conceito da distribuição das médias amostrais **S**, definimos a distribuição da variável reduzida (ou *escore* **z**) por $$z = \frac{(S - \mu_S)}{\sigma_S}$$ que tem média 0 e variância 1, representada na figura abaixo, onde são mostrados os limites de aceitação dos valores de **z**. 
 
-```{r }
+```{r preview = TRUE}
 x <- seq(-4,4,by = 0.01)
 dfnorm <- data.frame(x = x, d = dnorm(x))
 alpha = 0.05
