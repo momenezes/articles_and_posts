@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
-    <title>Alguns Tutoriais</title>
+    <title>Tips to Share and Grow</title>
     <link>https://momenezes.github.io/tutorials/</link>
     <atom:link href="https://momenezes.github.io/tutorials/index.xml" rel="self" type="application/rss+xml"/>
-    <description>Pequenos estudos e experimentos de códigos em R.
+    <description>Estudos e experimentos de códigos em R.
 Outras tecnologias, ferramentas e linguagens também.
+
+Studies and experiments, R codes.
+Other technologies, tools and languages as well.
 </description>
     <generator>Distill</generator>
     <lastBuildDate>Thu, 11 Nov 2021 00:00:00 +0000</lastBuildDate>
@@ -16,7 +19,7 @@ Outras tecnologias, ferramentas e linguagens também.
       <description>Conceitos, cálculos e visualizações.</description>
       <guid>https://momenezes.github.io/tutorials/posts/2021-10-30-teste-de-hipteses</guid>
       <pubDate>Thu, 11 Nov 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://momenezes.github.io/tutorials/posts/2021-10-30-teste-de-hipteses/distill-preview.png" medium="image" type="image/png" width="1248" height="768"/>
+      <media:content url="https://momenezes.github.io/tutorials/posts/2021-10-30-teste-de-hipteses/figures/regioesaceitacaorejeicao_previewimg.png" medium="image" type="image/png" width="300" height="184"/>
     </item>
     <item>
       <title>Médias Móveis</title>
@@ -25,6 +28,7 @@ Outras tecnologias, ferramentas e linguagens também.
       <description>Conceitos, cálculos e visualização.</description>
       <guid>https://momenezes.github.io/tutorials/posts/2021-09-25-mediasmoveis</guid>
       <pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://momenezes.github.io/tutorials/posts/2021-09-25-mediasmoveis/figures/ilustracao_media_movel_previewimg.png" medium="image" type="image/png" width="300" height="105"/>
     </item>
     <item>
       <title>Paralelizando a leitura de muitos arquivos no R</title>

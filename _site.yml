@@ -1,8 +1,11 @@
-name: "tutorials-r-and-other-tools"
-title: "Alguns Tutoriais"
+name: "shareandgrowtips"
+title: "Tips to Share and Grow"
 description: |
-  Pequenos estudos e experimentos de códigos em R.
+  Estudos e experimentos de códigos em R.
   Outras tecnologias, ferramentas e linguagens também.
+  
+  Studies and experiments, R codes.
+  Other technologies, tools and languages as well.
 output_dir: "."
 base_url: https://momenezes.github.io/tutorials/
 collections:

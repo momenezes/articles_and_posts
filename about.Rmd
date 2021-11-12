@@ -1,6 +1,8 @@
 ---
 title: "About this blog"
 description: |
+  I'm collecting here pieces of code or concepts, often as a result of some specific need, mine or of some student who ask for help. 
+  
   Estou reunindo aqui trechos de códigos, normalmente resultado de algum estudo para atender a uma necessidade específica minha ou de alguém que pediu ajuda.
 ---
 

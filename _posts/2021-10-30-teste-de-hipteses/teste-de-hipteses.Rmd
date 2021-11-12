@@ -7,6 +7,7 @@ author:
     url: https://momenezes.github.io/tutorials
     orcid_id: 0000-0003-0263-3541
 date: 11-11-2021
+preview: figures/regioesaceitacaorejeicao_previewimg.png
 output:
   distill::distill_article:
     self_contained: true
@@ -326,7 +327,7 @@ A conclusão do teste de hipótese é uma afirmação que pode estar certa ou er
 
 Retomando o conceito da distribuição das médias amostrais **S**, definimos a distribuição da variável reduzida (ou *escore* **z**) por $$z = \frac{(S - \mu_S)}{\sigma_S}$$ que tem média 0 e variância 1, representada na figura abaixo, onde são mostrados os limites de aceitação dos valores de **z**. 
 
-```{r preview = TRUE}
+```{r }
 x <- seq(-4,4,by = 0.01)
 dfnorm <- data.frame(x = x, d = dnorm(x))
 alpha = 0.05
