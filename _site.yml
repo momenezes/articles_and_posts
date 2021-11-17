@@ -8,6 +8,7 @@ description: |
   Other technologies, tools and languages as well.
 output_dir: "."
 base_url: https://momenezes.github.io/tutorials/
+google_analytics: "G-JSH8EEK2S2"
 collections:
   posts:
     creative_commons: CC BY
